@@ -1,0 +1,1043 @@
+{
+  "payments": [
+    {
+      "payment_id": "p001",
+      "payer": "john",
+      "how": "oldest first",
+      "links": [{"invoice": "l_hotel", "owed_by": "john", "amount": "300.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p002",
+      "payer": "jake",
+      "how": "exact match",
+      "links": [{"invoice": "l_boat", "owed_by": "jake", "amount": "150.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p003",
+      "payer": "amara",
+      "how": "exact match",
+      "links": [{"invoice": "l_museum", "owed_by": "amara", "amount": "42.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p004",
+      "payer": "sofia",
+      "how": "exact match",
+      "links": [{"invoice": "l_hotel", "owed_by": "sofia", "amount": "200.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p005",
+      "payer": "sofia",
+      "how": "exact match",
+      "links": [{"invoice": "l_surf", "owed_by": "sofia", "amount": "120.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p006",
+      "payer": null,
+      "how": "held",
+      "links": [],
+      "unmatched": "150.00",
+      "true_payer": "sofia",
+      "reason": "Sender too vague",
+      "candidates": [{"invoice": "l_boat", "owed_by": "sofia", "amount": "150.00"}]
+    },
+    {
+      "payment_id": "p007",
+      "payer": "tunde",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "l_hotel", "owed_by": "tunde", "amount": "200.00"},
+        {"invoice": "l_dinner1", "owed_by": "tunde", "amount": "103.12"},
+        {"invoice": "l_museum", "owed_by": "tunde", "amount": "42.00"},
+        {"invoice": "l_bar", "owed_by": "tunde", "amount": "79.33"},
+        {"invoice": "l_dinner2", "owed_by": "tunde", "amount": "180.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p008",
+      "payer": "john",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "l_hotel", "owed_by": "john", "amount": "300.00"},
+        {"invoice": "l_van", "owed_by": "john", "amount": "50.00"},
+        {"invoice": "l_dinner1", "owed_by": "john", "amount": "103.13"},
+        {"invoice": "l_boat", "owed_by": "john", "amount": "96.87"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p009",
+      "payer": "sofia",
+      "how": "exact match",
+      "links": [{"invoice": "l_dinner2", "owed_by": "sofia", "amount": "180.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p010",
+      "payer": "jake",
+      "how": "memo",
+      "links": [
+        {"invoice": "l_van", "owed_by": "jake", "amount": "50.00"},
+        {"invoice": "l_van", "owed_by": "amara", "amount": "50.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p011",
+      "payer": null,
+      "how": "held",
+      "links": [],
+      "unmatched": "300.00",
+      "true_payer": "john",
+      "reason": "Sender not recognised"
+    },
+    {
+      "payment_id": "p012",
+      "payer": "jake",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "l_hotel", "owed_by": "jake", "amount": "600.00"},
+        {"invoice": "l_dinner1", "owed_by": "jake", "amount": "100.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p013",
+      "payer": "jake",
+      "how": "held",
+      "links": [],
+      "unmatched": "700.00",
+      "reason": "Same payment reported twice"
+    },
+    {
+      "payment_id": "p014",
+      "payer": "john",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "l_boat", "owed_by": "john", "amount": "203.13"},
+        {"invoice": "l_bar", "owed_by": "john", "amount": "126.95"},
+        {"invoice": "l_dinner2", "owed_by": "john", "amount": "180.00"},
+        {"invoice": "l_cleaning", "owed_by": "john", "amount": "60.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p015",
+      "payer": "amara",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "l_hotel", "owed_by": "amara", "amount": "400.00"},
+        {"invoice": "l_dinner1", "owed_by": "amara", "amount": "103.12"},
+        {"invoice": "l_dinner2", "owed_by": "amara", "amount": "180.00"}
+      ],
+      "unmatched": "16.88",
+      "reason": "Paid more than owed"
+    },
+    {
+      "payment_id": "p016",
+      "payer": "john",
+      "how": "oldest first",
+      "links": [{"invoice": "w_venue", "owed_by": "john", "amount": "200.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p017",
+      "payer": "jake",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "l_dinner1", "owed_by": "jake", "amount": "3.13"},
+        {"invoice": "l_bar", "owed_by": "jake", "amount": "111.07"},
+        {"invoice": "l_surf", "owed_by": "jake", "amount": "120.00"},
+        {"invoice": "l_dinner2", "owed_by": "jake", "amount": "65.80"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p018",
+      "payer": "jake",
+      "how": "exact match",
+      "links": [{"invoice": "w_venue", "owed_by": "jake", "amount": "700.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p019",
+      "payer": null,
+      "how": "held",
+      "links": [],
+      "unmatched": "240.00",
+      "reason": "Sender matches more than one person",
+      "candidates": [
+        {"invoice": "w_flowers", "owed_by": "priya_n", "amount": "240.00"},
+        {"invoice": "w_flowers", "owed_by": "priya_s", "amount": "240.00"}
+      ]
+    },
+    {
+      "payment_id": "p020",
+      "payer": "priya_n",
+      "how": "exact match",
+      "links": [{"invoice": "w_flowers", "owed_by": "priya_n", "amount": "240.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p021",
+      "payer": null,
+      "how": "held",
+      "links": [],
+      "unmatched": "350.00",
+      "reason": "Sender matches more than one person",
+      "candidates": [
+        {"invoice": "w_venue", "owed_by": "chris", "amount": "350.00"},
+        {"invoice": "w_venue", "owed_by": "kris", "amount": "350.00"}
+      ]
+    },
+    {
+      "payment_id": "p022",
+      "payer": "priya_s",
+      "how": "exact match",
+      "links": [{"invoice": "w_flowers", "owed_by": "priya_s", "amount": "240.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p023",
+      "payer": "chris",
+      "how": "exact match",
+      "links": [{"invoice": "w_venue", "owed_by": "chris", "amount": "350.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p024",
+      "payer": "kris",
+      "how": "exact match",
+      "links": [{"invoice": "w_venue", "owed_by": "kris", "amount": "350.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p025",
+      "payer": "chris",
+      "how": "held",
+      "links": [],
+      "unmatched": "100.00",
+      "reason": "Not incoming money"
+    },
+    {
+      "payment_id": "p026",
+      "payer": "john",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "w_venue", "owed_by": "john", "amount": "500.00"},
+        {"invoice": "w_rehearsal", "owed_by": "john", "amount": "310.19"},
+        {"invoice": "w_photo", "owed_by": "john", "amount": "189.81"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p027",
+      "payer": "amara",
+      "how": "exact match",
+      "links": [{"invoice": "w_venue", "owed_by": "amara", "amount": "350.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p028",
+      "payer": "amara",
+      "how": "memo",
+      "links": [{"invoice": "w_brunch", "owed_by": "kris", "amount": "165.24"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p029",
+      "payer": "amara",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "w_shuttle", "owed_by": "amara", "amount": "110.02"},
+        {"invoice": "w_photo", "owed_by": "amara", "amount": "500.00"},
+        {"invoice": "w_brunch", "owed_by": "amara", "amount": "110.16"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p030",
+      "payer": "john",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "w_photo", "owed_by": "john", "amount": "310.19"},
+        {"invoice": "w_suits", "owed_by": "john", "amount": "220.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p031",
+      "payer": "priya_n",
+      "how": "exact match",
+      "links": [{"invoice": "w_venue", "owed_by": "priya_n", "amount": "525.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p032",
+      "payer": "priya_s",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "w_venue", "owed_by": "priya_s", "amount": "525.00"},
+        {"invoice": "w_rehearsal", "owed_by": "priya_s", "amount": "310.19"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p033",
+      "payer": "chris",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "w_rehearsal", "owed_by": "chris", "amount": "310.18"},
+        {"invoice": "w_shuttle", "owed_by": "chris", "amount": "109.99"},
+        {"invoice": "w_suits", "owed_by": "chris", "amount": "220.00"},
+        {"invoice": "w_afterparty", "owed_by": "chris", "amount": "240.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p034",
+      "payer": "kris",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "w_shuttle", "owed_by": "kris", "amount": "109.99"},
+        {"invoice": "w_afterparty", "owed_by": "kris", "amount": "160.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p035",
+      "payer": "jake",
+      "how": "exact match",
+      "links": [{"invoice": "w_afterparty", "owed_by": "jake", "amount": "400.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p036",
+      "payer": "jake",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "l_dinner2", "owed_by": "jake", "amount": "114.20"},
+        {"invoice": "l_cleaning", "owed_by": "jake", "amount": "48.00"},
+        {"invoice": "w_photo", "owed_by": "jake", "amount": "437.80"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p037",
+      "payer": null,
+      "how": "held",
+      "links": [],
+      "unmatched": "480.00",
+      "true_payer": "mei",
+      "reason": "Sender not recognised"
+    },
+    {
+      "payment_id": "p038",
+      "payer": "ben",
+      "how": "oldest first",
+      "links": [{"invoice": "k_cabin", "owed_by": "ben", "amount": "50.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p039",
+      "payer": "dele",
+      "how": "exact match",
+      "links": [{"invoice": "k_kayaks", "owed_by": "dele", "amount": "130.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p040",
+      "payer": "dele",
+      "how": "exact match",
+      "links": [{"invoice": "k_cabin", "owed_by": "dele", "amount": "480.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p041",
+      "payer": "tunde",
+      "how": "exact match",
+      "links": [{"invoice": "k_gas", "owed_by": "tunde", "amount": "48.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p042",
+      "payer": "sofia",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "k_cabin", "owed_by": "sofia", "amount": "240.00"},
+        {"invoice": "k_bbq", "owed_by": "sofia", "amount": "257.60"},
+        {"invoice": "k_fuel", "owed_by": "sofia", "amount": "2.40"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p043",
+      "payer": "sofia",
+      "how": "exact match",
+      "links": [{"invoice": "k_fuel", "owed_by": "sofia", "amount": "37.60"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p044",
+      "payer": "chris",
+      "how": "oldest first",
+      "links": [{"invoice": "k_cabin", "owed_by": "chris", "amount": "100.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p045",
+      "payer": "ben",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "k_cabin", "owed_by": "ben", "amount": "430.00"},
+        {"invoice": "k_food1", "owed_by": "ben", "amount": "97.37"},
+        {"invoice": "k_kayaks", "owed_by": "ben", "amount": "130.00"},
+        {"invoice": "k_fireworks", "owed_by": "ben", "amount": "50.00"},
+        {"invoice": "k_food2", "owed_by": "ben", "amount": "106.07"},
+        {"invoice": "k_repair", "owed_by": "ben", "amount": "186.56"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p046",
+      "payer": "chris",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "k_cabin", "owed_by": "chris", "amount": "140.00"},
+        {"invoice": "k_bbq", "owed_by": "chris", "amount": "257.60"},
+        {"invoice": "k_fuel", "owed_by": "chris", "amount": "40.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p047",
+      "payer": "tunde",
+      "how": "exact match",
+      "links": [{"invoice": "k_cabin", "owed_by": "tunde", "amount": "480.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p048",
+      "payer": "tunde",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "k_food1", "owed_by": "tunde", "amount": "97.36"},
+        {"invoice": "k_food2", "owed_by": "tunde", "amount": "106.06"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p049",
+      "payer": "ben",
+      "how": "exact match",
+      "links": [{"invoice": "k_repair", "owed_by": "ben", "amount": "263.44"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p050",
+      "payer": "mei",
+      "how": "exact match",
+      "links": [{"invoice": "k_food1", "owed_by": "mei", "amount": "97.37"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p051",
+      "payer": "mei",
+      "how": "exact match",
+      "links": [{"invoice": "k_fireworks", "owed_by": "mei", "amount": "50.01"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p052",
+      "payer": "dele",
+      "how": "held",
+      "links": [],
+      "unmatched": "20.00",
+      "reason": "Not incoming money"
+    },
+    {
+      "payment_id": "p053",
+      "payer": null,
+      "how": "held",
+      "links": [],
+      "unmatched": "480.00",
+      "reason": "Sender not recognised"
+    },
+    {
+      "payment_id": "p054",
+      "payer": "ben",
+      "how": "oldest first",
+      "links": [],
+      "unmatched": "60.00",
+      "reason": "Paid more than owed"
+    },
+    {
+      "payment_id": "p055",
+      "payer": "priya_n",
+      "how": "exact match",
+      "links": [{"invoice": "a_airbnb", "owed_by": "priya_n", "amount": "630.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p056",
+      "payer": null,
+      "how": "held",
+      "links": [],
+      "unmatched": "450.00",
+      "reason": "Sender matches more than one person",
+      "candidates": [{"invoice": "a_passes", "owed_by": "priya_n", "amount": "450.00"}]
+    },
+    {
+      "payment_id": "p057",
+      "payer": "jake",
+      "how": "exact match",
+      "links": [{"invoice": "w_photo", "owed_by": "jake", "amount": "62.20"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p058",
+      "payer": "mei",
+      "how": "exact match",
+      "links": [{"invoice": "k_gas", "owed_by": "mei", "amount": "48.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p059",
+      "payer": "mei",
+      "how": "exact match",
+      "links": [{"invoice": "a_airbnb", "owed_by": "mei", "amount": "840.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p060",
+      "payer": "kris",
+      "how": "exact match",
+      "links": [{"invoice": "a_airbnb", "owed_by": "kris", "amount": "420.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p061",
+      "payer": "dele",
+      "how": "exact match",
+      "links": [{"invoice": "a_passes", "owed_by": "dele", "amount": "450.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p062",
+      "payer": "dele",
+      "how": "exact match",
+      "links": [{"invoice": "a_airbnb", "owed_by": "dele", "amount": "420.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p063",
+      "payer": "jake",
+      "how": "memo",
+      "links": [
+        {"invoice": "a_karaoke", "owed_by": "jake", "amount": "117.00"},
+        {"invoice": "a_karaoke", "owed_by": "mei", "amount": "156.00"},
+        {"invoice": "a_karaoke", "owed_by": "ben", "amount": "117.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p064",
+      "payer": "john",
+      "how": "memo",
+      "links": [
+        {"invoice": "a_tab", "owed_by": "john", "amount": "715.75"},
+        {"invoice": "a_tab", "owed_by": "jake", "amount": "306.75"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p065",
+      "payer": "john",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "a_airbnb", "owed_by": "john", "amount": "840.00"},
+        {"invoice": "a_passes", "owed_by": "john", "amount": "450.00"},
+        {"invoice": "a_dinner", "owed_by": "john", "amount": "210.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p066",
+      "payer": "kris",
+      "how": "exact match",
+      "links": [{"invoice": "a_parking", "owed_by": "kris", "amount": "96.50"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p067",
+      "payer": "john",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "a_dinner", "owed_by": "john", "amount": "22.87"},
+        {"invoice": "a_wifi", "owed_by": "john", "amount": "15.00"},
+        {"invoice": "a_cleaning", "owed_by": "john", "amount": "100.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p068",
+      "payer": "dele",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "k_food1", "owed_by": "dele", "amount": "97.37"},
+        {"invoice": "k_fireworks", "owed_by": "dele", "amount": "49.99"},
+        {"invoice": "a_rides", "owed_by": "dele", "amount": "51.30"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p069",
+      "payer": "mei",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "a_passes", "owed_by": "mei", "amount": "450.00"},
+        {"invoice": "a_dinner", "owed_by": "mei", "amount": "226.02"},
+        {"invoice": "a_wifi", "owed_by": "mei", "amount": "15.00"},
+        {"invoice": "a_cleaning", "owed_by": "mei", "amount": "8.98"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p070",
+      "payer": "kris",
+      "how": "oldest first",
+      "links": [{"invoice": "a_passes", "owed_by": "kris", "amount": "400.00"}],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p071",
+      "payer": "ben",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "a_airbnb", "owed_by": "ben", "amount": "630.00"},
+        {"invoice": "a_passes", "owed_by": "ben", "amount": "450.00"},
+        {"invoice": "a_dinner", "owed_by": "ben", "amount": "226.01"},
+        {"invoice": "a_wifi", "owed_by": "ben", "amount": "15.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p072",
+      "payer": "jake",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "w_suits", "owed_by": "jake", "amount": "220.00"},
+        {"invoice": "a_airbnb", "owed_by": "jake", "amount": "420.00"},
+        {"invoice": "a_passes", "owed_by": "jake", "amount": "160.00"}
+      ],
+      "unmatched": "0.00"
+    },
+    {
+      "payment_id": "p073",
+      "payer": "priya_n",
+      "how": "oldest first",
+      "links": [
+        {"invoice": "w_rehearsal", "owed_by": "priya_n", "amount": "310.19"},
+        {"invoice": "a_passes", "owed_by": "priya_n", "amount": "338.48"}
+      ],
+      "unmatched": "0.00"
+    }
+  ],
+  "invoices": [
+    {
+      "invoice": "l_hotel",
+      "event": "lisbon",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "600.00", "paid": "600.00", "status": "paid"},
+        {"person": "jake", "owed": "600.00", "paid": "600.00", "status": "paid"},
+        {"person": "amara", "owed": "400.00", "paid": "400.00", "status": "paid"},
+        {"person": "tunde", "owed": "200.00", "paid": "200.00", "status": "paid"},
+        {"person": "sofia", "owed": "200.00", "paid": "200.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "l_van",
+      "event": "lisbon",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "50.00", "paid": "50.00", "status": "paid"},
+        {"person": "jake", "owed": "50.00", "paid": "50.00", "status": "paid"},
+        {"person": "amara", "owed": "50.00", "paid": "50.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "l_dinner1",
+      "event": "lisbon",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "103.13", "paid": "103.13", "status": "paid"},
+        {"person": "jake", "owed": "103.13", "paid": "103.13", "status": "paid"},
+        {"person": "amara", "owed": "103.12", "paid": "103.12", "status": "paid"},
+        {"person": "tunde", "owed": "103.12", "paid": "103.12", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "l_boat",
+      "event": "lisbon",
+      "status": "partial",
+      "shares": [
+        {"person": "john", "owed": "300.00", "paid": "300.00", "status": "paid"},
+        {"person": "jake", "owed": "150.00", "paid": "150.00", "status": "paid"},
+        {"person": "sofia", "owed": "150.00", "paid": "0.00", "status": "unpaid"}
+      ]
+    },
+    {
+      "invoice": "l_museum",
+      "event": "lisbon",
+      "status": "paid",
+      "shares": [
+        {"person": "amara", "owed": "42.00", "paid": "42.00", "status": "paid"},
+        {"person": "tunde", "owed": "42.00", "paid": "42.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "l_bar",
+      "event": "lisbon",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "126.95", "paid": "126.95", "status": "paid"},
+        {"person": "jake", "owed": "111.07", "paid": "111.07", "status": "paid"},
+        {"person": "tunde", "owed": "79.33", "paid": "79.33", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "l_surf",
+      "event": "lisbon",
+      "status": "paid",
+      "shares": [
+        {"person": "jake", "owed": "120.00", "paid": "120.00", "status": "paid"},
+        {"person": "sofia", "owed": "120.00", "paid": "120.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "l_dinner2",
+      "event": "lisbon",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "180.00", "paid": "180.00", "status": "paid"},
+        {"person": "jake", "owed": "180.00", "paid": "180.00", "status": "paid"},
+        {"person": "amara", "owed": "180.00", "paid": "180.00", "status": "paid"},
+        {"person": "tunde", "owed": "180.00", "paid": "180.00", "status": "paid"},
+        {"person": "sofia", "owed": "180.00", "paid": "180.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "l_cleaning",
+      "event": "lisbon",
+      "status": "partial",
+      "shares": [
+        {"person": "john", "owed": "60.00", "paid": "60.00", "status": "paid"},
+        {"person": "jake", "owed": "48.00", "paid": "48.00", "status": "paid"}
+      ],
+      "unassigned": "12.00"
+    },
+    {
+      "invoice": "w_venue",
+      "event": "wedding",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "700.00", "paid": "700.00", "status": "paid"},
+        {"person": "jake", "owed": "700.00", "paid": "700.00", "status": "paid"},
+        {"person": "priya_n", "owed": "525.00", "paid": "525.00", "status": "paid"},
+        {"person": "priya_s", "owed": "525.00", "paid": "525.00", "status": "paid"},
+        {"person": "chris", "owed": "350.00", "paid": "350.00", "status": "paid"},
+        {"person": "kris", "owed": "350.00", "paid": "350.00", "status": "paid"},
+        {"person": "amara", "owed": "350.00", "paid": "350.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "w_rehearsal",
+      "event": "wedding",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "310.19", "paid": "310.19", "status": "paid"},
+        {"person": "priya_n", "owed": "310.19", "paid": "310.19", "status": "paid"},
+        {"person": "priya_s", "owed": "310.19", "paid": "310.19", "status": "paid"},
+        {"person": "chris", "owed": "310.18", "paid": "310.18", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "w_flowers",
+      "event": "wedding",
+      "status": "paid",
+      "shares": [
+        {"person": "priya_n", "owed": "240.00", "paid": "240.00", "status": "paid"},
+        {"person": "priya_s", "owed": "240.00", "paid": "240.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "w_shuttle",
+      "event": "wedding",
+      "status": "paid",
+      "shares": [
+        {"person": "chris", "owed": "109.99", "paid": "109.99", "status": "paid"},
+        {"person": "kris", "owed": "109.99", "paid": "109.99", "status": "paid"},
+        {"person": "amara", "owed": "110.02", "paid": "110.02", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "w_photo",
+      "event": "wedding",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "500.00", "paid": "500.00", "status": "paid"},
+        {"person": "jake", "owed": "500.00", "paid": "500.00", "status": "paid"},
+        {"person": "amara", "owed": "500.00", "paid": "500.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "w_suits",
+      "event": "wedding",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "220.00", "paid": "220.00", "status": "paid"},
+        {"person": "jake", "owed": "220.00", "paid": "220.00", "status": "paid"},
+        {"person": "chris", "owed": "220.00", "paid": "220.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "w_brunch",
+      "event": "wedding",
+      "status": "paid",
+      "shares": [
+        {"person": "kris", "owed": "165.24", "paid": "165.24", "status": "paid"},
+        {"person": "amara", "owed": "110.16", "paid": "110.16", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "w_afterparty",
+      "event": "wedding",
+      "status": "paid",
+      "shares": [
+        {"person": "jake", "owed": "400.00", "paid": "400.00", "status": "paid"},
+        {"person": "chris", "owed": "240.00", "paid": "240.00", "status": "paid"},
+        {"person": "kris", "owed": "160.00", "paid": "160.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "k_cabin",
+      "event": "lake",
+      "status": "partial",
+      "shares": [
+        {"person": "ben", "owed": "480.00", "paid": "480.00", "status": "paid"},
+        {"person": "mei", "owed": "480.00", "paid": "0.00", "status": "unpaid"},
+        {"person": "dele", "owed": "480.00", "paid": "480.00", "status": "paid"},
+        {"person": "tunde", "owed": "480.00", "paid": "480.00", "status": "paid"},
+        {"person": "sofia", "owed": "240.00", "paid": "240.00", "status": "paid"},
+        {"person": "chris", "owed": "240.00", "paid": "240.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "k_food1",
+      "event": "lake",
+      "status": "paid",
+      "shares": [
+        {"person": "ben", "owed": "97.37", "paid": "97.37", "status": "paid"},
+        {"person": "mei", "owed": "97.37", "paid": "97.37", "status": "paid"},
+        {"person": "dele", "owed": "97.37", "paid": "97.37", "status": "paid"},
+        {"person": "tunde", "owed": "97.36", "paid": "97.36", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "k_kayaks",
+      "event": "lake",
+      "status": "paid",
+      "shares": [
+        {"person": "ben", "owed": "130.00", "paid": "130.00", "status": "paid"},
+        {"person": "dele", "owed": "130.00", "paid": "130.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "k_bbq",
+      "event": "lake",
+      "status": "paid",
+      "shares": [
+        {"person": "sofia", "owed": "257.60", "paid": "257.60", "status": "paid"},
+        {"person": "chris", "owed": "257.60", "paid": "257.60", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "k_gas",
+      "event": "lake",
+      "status": "paid",
+      "shares": [
+        {"person": "mei", "owed": "48.00", "paid": "48.00", "status": "paid"},
+        {"person": "tunde", "owed": "48.00", "paid": "48.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "k_fireworks",
+      "event": "lake",
+      "status": "paid",
+      "shares": [
+        {"person": "ben", "owed": "50.00", "paid": "50.00", "status": "paid"},
+        {"person": "dele", "owed": "49.99", "paid": "49.99", "status": "paid"},
+        {"person": "mei", "owed": "50.01", "paid": "50.01", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "k_food2",
+      "event": "lake",
+      "status": "paid",
+      "shares": [
+        {"person": "ben", "owed": "106.07", "paid": "106.07", "status": "paid"},
+        {"person": "tunde", "owed": "106.06", "paid": "106.06", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "k_fuel",
+      "event": "lake",
+      "status": "paid",
+      "shares": [
+        {"person": "sofia", "owed": "40.00", "paid": "40.00", "status": "paid"},
+        {"person": "chris", "owed": "40.00", "paid": "40.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "k_repair",
+      "event": "lake",
+      "status": "paid",
+      "shares": [{"person": "ben", "owed": "450.00", "paid": "450.00", "status": "paid"}]
+    },
+    {
+      "invoice": "a_airbnb",
+      "event": "austin",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "840.00", "paid": "840.00", "status": "paid"},
+        {"person": "mei", "owed": "840.00", "paid": "840.00", "status": "paid"},
+        {"person": "ben", "owed": "630.00", "paid": "630.00", "status": "paid"},
+        {"person": "priya_n", "owed": "630.00", "paid": "630.00", "status": "paid"},
+        {"person": "dele", "owed": "420.00", "paid": "420.00", "status": "paid"},
+        {"person": "kris", "owed": "420.00", "paid": "420.00", "status": "paid"},
+        {"person": "jake", "owed": "420.00", "paid": "420.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "a_passes",
+      "event": "austin",
+      "status": "partial",
+      "shares": [
+        {"person": "john", "owed": "450.00", "paid": "450.00", "status": "paid"},
+        {"person": "mei", "owed": "450.00", "paid": "450.00", "status": "paid"},
+        {"person": "ben", "owed": "450.00", "paid": "450.00", "status": "paid"},
+        {"person": "priya_n", "owed": "450.00", "paid": "338.48", "status": "partial"},
+        {"person": "dele", "owed": "450.00", "paid": "450.00", "status": "paid"},
+        {"person": "kris", "owed": "450.00", "paid": "400.00", "status": "partial"},
+        {"person": "jake", "owed": "450.00", "paid": "160.00", "status": "partial"}
+      ]
+    },
+    {
+      "invoice": "a_dinner",
+      "event": "austin",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "232.87", "paid": "232.87", "status": "paid"},
+        {"person": "mei", "owed": "226.02", "paid": "226.02", "status": "paid"},
+        {"person": "ben", "owed": "226.01", "paid": "226.01", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "a_rides",
+      "event": "austin",
+      "status": "partial",
+      "shares": [
+        {"person": "priya_n", "owed": "63.67", "paid": "0.00", "status": "unpaid"},
+        {"person": "dele", "owed": "63.66", "paid": "51.30", "status": "partial"}
+      ]
+    },
+    {
+      "invoice": "a_bbq",
+      "event": "austin",
+      "status": "unpaid",
+      "shares": [
+        {"person": "jake", "owed": "135.00", "paid": "0.00", "status": "unpaid"},
+        {"person": "kris", "owed": "135.00", "paid": "0.00", "status": "unpaid"},
+        {"person": "dele", "owed": "135.00", "paid": "0.00", "status": "unpaid"},
+        {"person": "priya_n", "owed": "135.00", "paid": "0.00", "status": "unpaid"}
+      ]
+    },
+    {
+      "invoice": "a_wifi",
+      "event": "austin",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "15.00", "paid": "15.00", "status": "paid"},
+        {"person": "mei", "owed": "15.00", "paid": "15.00", "status": "paid"},
+        {"person": "ben", "owed": "15.00", "paid": "15.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "a_karaoke",
+      "event": "austin",
+      "status": "paid",
+      "shares": [
+        {"person": "mei", "owed": "156.00", "paid": "156.00", "status": "paid"},
+        {"person": "ben", "owed": "117.00", "paid": "117.00", "status": "paid"},
+        {"person": "jake", "owed": "117.00", "paid": "117.00", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "a_tab",
+      "event": "austin",
+      "status": "paid",
+      "shares": [
+        {"person": "john", "owed": "715.75", "paid": "715.75", "status": "paid"},
+        {"person": "jake", "owed": "306.75", "paid": "306.75", "status": "paid"}
+      ]
+    },
+    {
+      "invoice": "a_cleaning",
+      "event": "austin",
+      "status": "partial",
+      "shares": [
+        {"person": "john", "owed": "100.00", "paid": "100.00", "status": "paid"},
+        {"person": "mei", "owed": "100.00", "paid": "8.98", "status": "partial"}
+      ]
+    },
+    {
+      "invoice": "a_parking",
+      "event": "austin",
+      "status": "paid",
+      "shares": [{"person": "kris", "owed": "96.50", "paid": "96.50", "status": "paid"}]
+    }
+  ],
+  "balances": [
+    {"event": "lisbon", "person": "john", "owed": "1420.08", "paid": "1420.08", "remaining": "0.00"},
+    {"event": "lisbon", "person": "jake", "owed": "1362.20", "paid": "1362.20", "remaining": "0.00"},
+    {"event": "lisbon", "person": "amara", "owed": "775.12", "paid": "775.12", "remaining": "0.00"},
+    {"event": "lisbon", "person": "tunde", "owed": "604.45", "paid": "604.45", "remaining": "0.00"},
+    {"event": "lisbon", "person": "sofia", "owed": "650.00", "paid": "500.00", "remaining": "150.00"},
+    {"event": "wedding", "person": "john", "owed": "1730.19", "paid": "1730.19", "remaining": "0.00"},
+    {"event": "wedding", "person": "jake", "owed": "1820.00", "paid": "1820.00", "remaining": "0.00"},
+    {"event": "wedding", "person": "priya_n", "owed": "1075.19", "paid": "1075.19", "remaining": "0.00"},
+    {"event": "wedding", "person": "priya_s", "owed": "1075.19", "paid": "1075.19", "remaining": "0.00"},
+    {"event": "wedding", "person": "chris", "owed": "1230.17", "paid": "1230.17", "remaining": "0.00"},
+    {"event": "wedding", "person": "kris", "owed": "785.23", "paid": "785.23", "remaining": "0.00"},
+    {"event": "wedding", "person": "amara", "owed": "1070.18", "paid": "1070.18", "remaining": "0.00"},
+    {"event": "lake", "person": "ben", "owed": "1313.44", "paid": "1313.44", "remaining": "0.00"},
+    {"event": "lake", "person": "mei", "owed": "675.38", "paid": "195.38", "remaining": "480.00"},
+    {"event": "lake", "person": "dele", "owed": "757.36", "paid": "757.36", "remaining": "0.00"},
+    {"event": "lake", "person": "tunde", "owed": "731.42", "paid": "731.42", "remaining": "0.00"},
+    {"event": "lake", "person": "sofia", "owed": "537.60", "paid": "537.60", "remaining": "0.00"},
+    {"event": "lake", "person": "chris", "owed": "537.60", "paid": "537.60", "remaining": "0.00"},
+    {"event": "austin", "person": "john", "owed": "2353.62", "paid": "2353.62", "remaining": "0.00"},
+    {"event": "austin", "person": "mei", "owed": "1787.02", "paid": "1696.00", "remaining": "91.02"},
+    {"event": "austin", "person": "ben", "owed": "1438.01", "paid": "1438.01", "remaining": "0.00"},
+    {"event": "austin", "person": "priya_n", "owed": "1278.67", "paid": "968.48", "remaining": "310.19"},
+    {"event": "austin", "person": "dele", "owed": "1068.66", "paid": "921.30", "remaining": "147.36"},
+    {"event": "austin", "person": "kris", "owed": "1101.50", "paid": "916.50", "remaining": "185.00"},
+    {"event": "austin", "person": "jake", "owed": "1428.75", "paid": "1003.75", "remaining": "425.00"}
+  ]
+}

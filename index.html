@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Events matcher: try it</title>
+<meta name="description" content="Match messy bank payments to shared-expense invoices. Runs the real Python code in your browser; nothing is uploaded.">
+<style>
+:root{--bg:#fafaf8;--fg:#1f2328;--mute:#656d76;--card:#fff;--line:#e3e1db;--accent:#2457c5;--accent-fg:#fff;--ok:#1a7f4b;--bad:#c4321f}
+@media (prefers-color-scheme:dark){:root{--bg:#16181c;--fg:#e6e6e3;--mute:#9aa1a9;--card:#1f2227;--line:#32363d;--accent:#7aa2f7;--accent-fg:#101318;--ok:#4cc38a;--bad:#f07a68}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:960px;margin:0 auto;padding:32px 16px 72px}
+h1{font-size:28px;margin:0 0 6px}h2{font-size:18px;margin:32px 0 10px}
+p{margin:0 0 12px}.lead{color:var(--mute);font-size:17px}.mute{color:var(--mute)}
+a{color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:14px}
+.mode{display:block;border:1px solid var(--line);border-radius:10px;padding:12px;cursor:pointer;background:var(--card)}
+.mode:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.mode b{display:block}.mode span{color:var(--mute);font-size:14px}
+.mode input{position:absolute;opacity:0;pointer-events:none}
+.mode:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.opts{margin:4px 0 14px}.opts[hidden]{display:none}
+label.f{display:inline-flex;align-items:center;gap:8px;margin-right:16px}
+input[type=number]{width:84px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit}
+input[type=file]{font:inherit;max-width:100%}
+button{font:inherit;padding:10px 18px;border-radius:10px;border:0;background:var(--accent);color:var(--accent-fg);font-weight:600;cursor:pointer}
+button:disabled{opacity:.55;cursor:default}
+button.ghost{background:transparent;color:var(--accent);border:1px solid var(--line);font-weight:500;padding:6px 12px;font-size:14px}
+#status{margin:12px 0 0;min-height:1.5em}#status.err{color:var(--bad)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.cards .card b{display:block;font-size:22px}.cards .card span{color:var(--mute);font-size:13px}
+table.score{border-collapse:collapse;width:100%}table.score td{padding:6px 10px;border-bottom:1px solid var(--line)}
+table.score td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.good{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}
+.dl{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+iframe{width:100%;height:760px;border:1px solid var(--line);border-radius:12px;background:#fff}
+ol{padding-left:20px}li{margin:4px 0}
+footer{margin-top:40px;color:var(--mute);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<h1>Events matcher</h1>
+<p class="lead">Match messy bank payments to the shared-expense invoices they pay. Names are abbreviated, one payment covers several people, bank alerts repeat, memos are free text. Anything the matcher can't be sure of is held for a person instead of guessed.</p>
+<p>This page runs the project's real Python code <b>in your browser</b> (via <a href="https://pyodide.org">Pyodide</a>). Nothing you load is uploaded. It uses the rule-based matcher; the optional local language model needs the command-line version. <a href="https://github.com/Jeffawe/events-matcher">Source and docs on GitHub</a>.</p>
+
+<h2>Try it</h2>
+<div class="card">
+  <div class="modes" role="radiogroup" aria-label="Where the data comes from">
+    <label class="mode"><input type="radio" name="mode" value="sample" checked><b>Sample data</b><span>7 events, 51 invoices, 100 messy payments, with an answer key.</span></label>
+    <label class="mode"><input type="radio" name="mode" value="generate"><b>Generate a new world</b><span>A brand-new messy scenario with known answers, from a seed.</span></label>
+    <label class="mode"><input type="radio" name="mode" value="custom"><b>Your own files</b><span>Event JSON files plus a payments.json. See the README for the format.</span></label>
+  </div>
+  <div class="opts" id="opts-generate" hidden>
+    <label class="f">Seed <input type="number" id="seed" value="7" min="1" max="99999"></label>
+    <label class="f">Events <input type="number" id="events" value="4" min="2" max="8"></label>
+    <label class="f">People <input type="number" id="people" value="11" min="6" max="20"></label>
+  </div>
+  <div class="opts" id="opts-custom" hidden>
+    <input type="file" id="files" accept=".json,application/json" multiple>
+    <p class="mute" style="margin-top:8px">Select all your event files and <code>payments.json</code> together (optionally <code>expected.json</code> to see a score).</p>
+  </div>
+  <button id="run" disabled>Loading Python…</button>
+  <p id="status" role="status" aria-live="polite"></p>
+</div>
+
+<section id="results" hidden>
+  <h2>Result</h2>
+  <div class="cards" id="cards"></div>
+  <div id="score"></div>
+  <div class="dl" id="downloads"></div>
+  <iframe id="report" sandbox="" title="Matching report"></iframe>
+</section>
+
+<h2>What happens</h2>
+<ol>
+  <li>Each payment's sender is matched to a person: exact name, then variants (initials, typos, nicknames, swapped order), scored as probabilities. Ambiguous senders are left for review.</li>
+  <li>A memo like "covering Amara's share" or "cab 92 + cabin 360" is checked against the invoices with exact arithmetic.</li>
+  <li>Money is applied to that person's invoices, never beyond what they owe. Each link carries two confidences: whose obligation it settles, and which invoice.</li>
+  <li>Everything uncertain is listed as "Needs a person". The command-line tool has a review loop that remembers your decisions.</li>
+</ol>
+
+<footer>MIT licensed · <a href="https://github.com/Jeffawe/events-matcher">github.com/Jeffawe/events-matcher</a></footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script>
+// Files the page fetches from this repo and runs. Keep this list in sync with the imports.
+const PY_FILES = [
+  "models.py","obligations.py","run.py","matcher.py",
+  "algorithms/__init__.py","algorithms/allocation.py","algorithms/browser.py","algorithms/dictionary.py",
+  "algorithms/identity.py","algorithms/level1_direct.py","algorithms/level2_variants.py",
+  "algorithms/level3_memo.py","algorithms/level4_items.py","algorithms/lexicon.py","algorithms/normalize.py",
+  "algorithms/params.py","algorithms/pipeline.py","algorithms/reconcile.py","algorithms/report.py",
+  "algorithms/review.py","algorithms/reviews.py","algorithms/state.py","algorithms/synth.py"
+];
+const SAMPLE_FILES = [
+  "events/austin.json","events/cabin_retreat.json","events/film_festival.json","events/lake.json",
+  "events/lisbon.json","events/nyc_reunion.json","events/wedding.json","payments.json","expected.json"
+];
+
+const $ = id => document.getElementById(id);
+const runBtn = $("run"), statusEl = $("status");
+let pyodide = null, lastFiles = null;
+
+function say(text, isError = false) { statusEl.textContent = text; statusEl.className = isError ? "err" : ""; }
+const money = c => "$" + (c / 100).toLocaleString("en-US", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+async function boot() {
+  try {
+    say("Loading Python (a few MB, first visit only)…");
+    pyodide = await loadPyodide();
+    say("Loading the matcher…");
+    const fetchText = async url => {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`could not load ${url} (${r.status})`);
+      return r.text();
+    };
+    for (const f of PY_FILES) {
+      const dir = f.includes("/") ? "/app/" + f.slice(0, f.lastIndexOf("/")) : "/app";
+      pyodide.FS.mkdirTree(dir);
+      pyodide.FS.writeFile("/app/" + f, await fetchText("./" + f));
+    }
+    for (const f of SAMPLE_FILES) {
+      const dir = f.includes("/") ? "/app/scenarios/" + f.slice(0, f.lastIndexOf("/")) : "/app/scenarios";
+      pyodide.FS.mkdirTree(dir);
+      pyodide.FS.writeFile("/app/scenarios/" + f, await fetchText("./scenarios/" + f));
+    }
+    pyodide.runPython("import sys; sys.path.insert(0, '/app')");
+    runBtn.disabled = false; runBtn.textContent = "Run the matcher";
+    say("");
+  } catch (e) {
+    say("Could not start Python: " + e.message, true);
+    runBtn.textContent = "Unavailable";
+  }
+}
+
+function mode() { return document.querySelector("input[name=mode]:checked").value; }
+document.querySelectorAll("input[name=mode]").forEach(r => r.addEventListener("change", () => {
+  $("opts-generate").hidden = mode() !== "generate";
+  $("opts-custom").hidden = mode() !== "custom";
+}));
+
+async function readCustomFiles() {
+  const picked = [...$("files").files];
+  if (!picked.length) throw new Error("Choose your files first.");
+  const out = {};
+  for (const f of picked) {
+    const text = await f.text();
+    let data;
+    try { data = JSON.parse(text); } catch { throw new Error(`${f.name} is not valid JSON.`); }
+    if (Array.isArray(data) && data.length && "sender_name" in data[0]) out["payments.json"] = text;
+    else if (data && Array.isArray(data.invoices) && Array.isArray(data.people)) out[`events/${data.id || f.name}.json`] = text;
+    else if (data && Array.isArray(data.payments) && data.payments[0] && "payment_id" in data.payments[0]) out["expected.json"] = text;
+    else throw new Error(`Could not tell what ${f.name} is (expected an event, the payments list, or an answer key).`);
+  }
+  if (!out["payments.json"]) throw new Error("No payments file found (a JSON list of payments with sender_name).");
+  if (!Object.keys(out).some(k => k.startsWith("events/"))) throw new Error("No event files found (objects with people and invoices).");
+  return out;
+}
+
+async function run() {
+  runBtn.disabled = true;
+  try {
+    say("Matching…");
+    await new Promise(r => setTimeout(r, 30)); // let the status paint before Python blocks the page
+    const g = pyodide.pyimport("algorithms.browser");
+    let raw;
+    if (mode() === "sample") raw = g.run_folder("/app/scenarios", "Sample data");
+    else if (mode() === "generate") raw = g.generate_and_run(+$("seed").value || 1, +$("events").value || 4, +$("people").value || 11);
+    else raw = g.run_custom(JSON.stringify(await readCustomFiles()));
+    show(JSON.parse(raw));
+    say("");
+  } catch (e) {
+    say("Something went wrong: " + String(e.message || e).split("\n").filter(Boolean).slice(-1)[0], true);
+  } finally { runBtn.disabled = false; }
+}
+
+function show(res) {
+  const s = res.summary;
+  const cards = [
+    [money(s.placed_cents), "matched to invoices"], [money(s.held_cents), "waiting for a person"],
+    [`${s.senders_identified}/${s.payments}`, "senders identified"], [`${s.invoices_paid}/${s.invoices}`, "invoices fully paid"],
+    [String(s.held_items), "items to review"]
+  ];
+  $("cards").replaceChildren(...cards.map(([big, small]) => {
+    const d = document.createElement("div"); d.className = "card";
+    const b = document.createElement("b"); b.textContent = big;
+    const sp = document.createElement("span"); sp.textContent = small;
+    d.append(b, sp); return d;
+  }));
+  const sc = res.score, box = $("score");
+  if (sc) {
+    const rows = [
+      ["Senders identified correctly", sc.senders_right, ""],
+      ["Senders identified WRONGLY", sc.senders_wrong, sc.senders_wrong ? "bad" : "good"],
+      ["Senders left for a person", sc.senders_uncertain, ""],
+      ["Links on the right person", `${sc.links_right_person} of ${sc.links}`, sc.links_right_person === sc.links ? "good" : "bad"],
+      ["Links on the exact invoice", `${sc.links_exact_invoice} of ${sc.links}`, ""],
+      ["Money placed vs the answer key", `${money(sc.money_placed_cents)} vs ${money(sc.money_in_key_cents)}`, ""]
+    ];
+    const t = document.createElement("table"); t.className = "score card";
+    for (const [k, v, cls] of rows) {
+      const tr = t.insertRow(); tr.insertCell().textContent = k;
+      const c = tr.insertCell(); c.textContent = v; if (cls) c.className = cls;
+    }
+    const h = document.createElement("h2"); h.textContent = "Against the answer key";
+    box.replaceChildren(h, t);
+  } else box.replaceChildren();
+  lastFiles = res.files;
+  $("downloads").replaceChildren(...Object.keys(res.files).map(name => {
+    const b = document.createElement("button"); b.className = "ghost"; b.textContent = "Download " + name;
+    b.onclick = () => {
+      const url = URL.createObjectURL(new Blob([lastFiles[name]], {type: "text/plain"}));
+      const a = document.createElement("a"); a.href = url; a.download = name; a.click(); URL.revokeObjectURL(url);
+    };
+    return b;
+  }));
+  $("report").srcdoc = res.files["report.html"];
+  $("results").hidden = false;
+  $("results").scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+runBtn.addEventListener("click", run);
+boot();
+</script>
+</body>
+</html>

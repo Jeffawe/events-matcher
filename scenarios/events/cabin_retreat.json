@@ -1,0 +1,79 @@
+{
+  "id": "cabin_retreat",
+  "name": "Catskills writing retreat",
+  "start_date": "2026-10-05",
+  "end_date": "2026-10-08",
+  "people": [
+    {"id": "alexa_k", "name": "Alexandra Kim"},
+    {"id": "sam_l", "name": "Sam Lee"},
+    {"id": "samuel_l", "name": "Samuel Lee"},
+    {"id": "jose_r", "name": "José Rivera"},
+    {"id": "zoe_m", "name": "Zoë Martin"},
+    {"id": "mina_k", "name": "Mina Kim"}
+  ],
+  "invoices": [
+    {
+      "id": "c_cabin",
+      "date": "2026-10-05",
+      "vendor": "Hemlock Cabin Co",
+      "description": "Cabin rental",
+      "total": "1800.00",
+      "shares": [
+        {"person": "alexa_k", "amount": "360.00"},
+        {"person": "sam_l", "amount": "360.00"},
+        {"person": "samuel_l", "amount": "360.00"},
+        {"person": "jose_r", "amount": "360.00"},
+        {"person": "mina_k", "amount": "360.00"}
+      ]
+    },
+    {
+      "id": "c_train",
+      "date": "2026-10-05",
+      "vendor": "Metro-North",
+      "description": "Group train tickets",
+      "total": "250.00",
+      "shares": [
+        {"person": "sam_l", "amount": "125.00"},
+        {"person": "samuel_l", "amount": "125.00"}
+      ]
+    },
+    {
+      "id": "c_groceries",
+      "date": "2026-10-06",
+      "vendor": "Freshtown",
+      "description": "Groceries and supplies",
+      "total": "321.13",
+      "shares": [
+        {"person": "alexa_k", "percent": "20"},
+        {"person": "sam_l", "percent": "20"},
+        {"person": "samuel_l", "percent": "20"},
+        {"person": "jose_r", "percent": "20"},
+        {"person": "zoe_m", "percent": "20"}
+      ]
+    },
+    {
+      "id": "c_chef",
+      "date": "2026-10-07",
+      "vendor": "Hudson Table",
+      "description": "Private chef dinner",
+      "total": "428.17",
+      "shares": [
+        {"person": "alexa_k", "percent": "25"},
+        {"person": "sam_l", "percent": "25"},
+        {"person": "jose_r", "percent": "25"},
+        {"person": "zoe_m", "percent": "25"}
+      ]
+    },
+    {
+      "id": "c_firewood",
+      "date": "2026-10-08",
+      "vendor": "Mountain Market",
+      "description": "Firewood and propane",
+      "total": "96.00",
+      "shares": [
+        {"person": "alexa_k", "amount": "48.00"},
+        {"person": "mina_k", "amount": "48.00"}
+      ]
+    }
+  ]
+}

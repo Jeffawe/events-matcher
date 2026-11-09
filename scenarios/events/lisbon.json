@@ -1,0 +1,115 @@
+{
+  "id": "lisbon",
+  "name": "Lisbon week",
+  "start_date": "2026-03-02",
+  "end_date": "2026-03-08",
+  "people": [
+    {"id": "john", "name": "John Adeyemi"},
+    {"id": "jake", "name": "Jake Morris"},
+    {"id": "amara", "name": "Amara Okoye"},
+    {"id": "tunde", "name": "Tunde Bello"},
+    {"id": "sofia", "name": "Sofía Núñez"}
+  ],
+  "invoices": [
+    {
+      "id": "l_hotel",
+      "date": "2026-03-02",
+      "vendor": "Hotel Alfama",
+      "description": "6 nights, 3 rooms",
+      "total": "2000.00",
+      "shares": [
+        {"person": "john", "percent": "30"},
+        {"person": "jake", "percent": "30"},
+        {"person": "amara", "percent": "20"},
+        {"person": "tunde", "percent": "10"},
+        {"person": "sofia", "percent": "10"}
+      ],
+      "note": "Split agreed in group chat"
+    },
+    {
+      "id": "l_van",
+      "date": "2026-03-02",
+      "vendor": "Aero Transfers",
+      "description": "Airport van",
+      "total": "150.00",
+      "shares": [
+        {"person": "john", "amount": "50.00"},
+        {"person": "jake", "amount": "50.00"},
+        {"person": "amara", "amount": "50.00"}
+      ]
+    },
+    {
+      "id": "l_dinner1",
+      "date": "2026-03-03",
+      "vendor": "Taberna do Bairro",
+      "description": "Welcome dinner",
+      "total": "412.50",
+      "shares": [
+        {"person": "john", "percent": "25"},
+        {"person": "jake", "percent": "25"},
+        {"person": "amara", "percent": "25"},
+        {"person": "tunde", "percent": "25"}
+      ],
+      "note": "Sofia skipped this"
+    },
+    {
+      "id": "l_boat",
+      "date": "2026-03-04",
+      "vendor": "Tejo Sailing",
+      "description": "Boat hire",
+      "total": "600.00",
+      "shares": [
+        {"person": "john", "amount": "300.00"},
+        {"person": "jake", "amount": "150.00"},
+        {"person": "sofia", "amount": "150.00"}
+      ]
+    },
+    {
+      "id": "l_museum",
+      "date": "2026-03-05",
+      "vendor": "Gulbenkian",
+      "description": "Museum tickets",
+      "total": "84.00",
+      "shares": [{"person": "amara", "percent": "50"}, {"person": "tunde", "percent": "50"}]
+    },
+    {
+      "id": "l_bar",
+      "date": "2026-03-05",
+      "vendor": "Pensão Amor",
+      "description": "Bar tab",
+      "total": "317.35",
+      "shares": [{"person": "john", "percent": "40"}, {"person": "jake", "percent": "35"}, {"person": "tunde", "percent": "25"}]
+    },
+    {
+      "id": "l_surf",
+      "date": "2026-03-06",
+      "vendor": "Caparica Surf",
+      "description": "Surf lesson",
+      "total": "240.00",
+      "shares": [{"person": "jake", "amount": "120.00"}, {"person": "sofia", "amount": "120.00"}]
+    },
+    {
+      "id": "l_dinner2",
+      "date": "2026-03-07",
+      "vendor": "Ramiro",
+      "description": "Last night dinner",
+      "total": "900.00",
+      "shares": [
+        {"person": "john", "percent": "20"},
+        {"person": "jake", "percent": "20"},
+        {"person": "amara", "percent": "20"},
+        {"person": "tunde", "percent": "20"},
+        {"person": "sofia", "percent": "20"}
+      ]
+    },
+    {
+      "id": "l_cleaning",
+      "date": "2026-03-08",
+      "vendor": "Hotel Alfama",
+      "description": "Room damage and cleaning",
+      "total": "120.00",
+      "shares": [{"person": "john", "percent": "50"}, {"person": "jake", "percent": "40"}],
+      "note": "Only adds to 90%. Nobody was given the rest."
+    }
+  ]
+}

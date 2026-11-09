@@ -1,0 +1,105 @@
+{
+  "id": "lake",
+  "name": "Lake house week",
+  "start_date": "2026-07-06",
+  "end_date": "2026-07-12",
+  "people": [
+    {"id": "ben", "name": "Ben Carter"},
+    {"id": "mei", "name": "Mei Chen"},
+    {"id": "dele", "name": "Dele Ojo"},
+    {"id": "tunde", "name": "Tunde Bello"},
+    {"id": "sofia", "name": "Sofía Núñez"},
+    {"id": "chris", "name": "Chris Lee"}
+  ],
+  "invoices": [
+    {
+      "id": "k_cabin",
+      "date": "2026-07-06",
+      "vendor": "Pinewood Rentals",
+      "description": "Lake house",
+      "total": "2400.00",
+      "shares": [
+        {"person": "ben", "percent": "20"},
+        {"person": "mei", "percent": "20"},
+        {"person": "dele", "percent": "20"},
+        {"person": "tunde", "percent": "20"},
+        {"person": "sofia", "percent": "10"},
+        {"person": "chris", "percent": "10"}
+      ]
+    },
+    {
+      "id": "k_food1",
+      "date": "2026-07-06",
+      "vendor": "Fresh Mart",
+      "description": "First grocery run",
+      "total": "389.47",
+      "shares": [
+        {"person": "ben", "percent": "25"},
+        {"person": "mei", "percent": "25"},
+        {"person": "dele", "percent": "25"},
+        {"person": "tunde", "percent": "25"}
+      ]
+    },
+    {
+      "id": "k_kayaks",
+      "date": "2026-07-07",
+      "vendor": "Lakeside Hire",
+      "description": "Kayaks",
+      "total": "260.00",
+      "shares": [{"person": "ben", "amount": "130.00"}, {"person": "dele", "amount": "130.00"}]
+    },
+    {
+      "id": "k_bbq",
+      "date": "2026-07-08",
+      "vendor": "Smoke Pit",
+      "description": "BBQ catering",
+      "total": "515.20",
+      "shares": [{"person": "sofia", "percent": "50"}, {"person": "chris", "percent": "50"}]
+    },
+    {
+      "id": "k_gas",
+      "date": "2026-07-08",
+      "vendor": "Shell",
+      "description": "Fuel for the drive",
+      "total": "96.00",
+      "shares": [{"person": "mei", "amount": "48.00"}, {"person": "tunde", "amount": "48.00"}]
+    },
+    {
+      "id": "k_fireworks",
+      "date": "2026-07-09",
+      "vendor": "Boom Bros",
+      "description": "Fireworks",
+      "total": "150.00",
+      "shares": [
+        {"person": "ben", "percent": "33.33"},
+        {"person": "dele", "percent": "33.33"},
+        {"person": "mei", "percent": "33.34"}
+      ]
+    },
+    {
+      "id": "k_food2",
+      "date": "2026-07-10",
+      "vendor": "Fresh Mart",
+      "description": "Second grocery run",
+      "total": "212.13",
+      "shares": [{"person": "ben", "percent": "50"}, {"person": "tunde", "percent": "50"}]
+    },
+    {
+      "id": "k_fuel",
+      "date": "2026-07-11",
+      "vendor": "Marina",
+      "description": "Boat fuel",
+      "total": "80.00",
+      "shares": [{"person": "sofia", "amount": "40.00"}, {"person": "chris", "amount": "40.00"}]
+    },
+    {
+      "id": "k_repair",
+      "date": "2026-07-12",
+      "vendor": "Dock Fix",
+      "description": "Dock repair",
+      "total": "450.00",
+      "shares": [{"person": "ben", "percent": "100"}],
+      "note": "Ben broke it"
+    }
+  ]
+}

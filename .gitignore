@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# macOS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Kept for one person's use, not source: review decisions, trusted aliases, learned data
+state/
+
+# Generated reports
+out/
+
+# Regenerate with: python3 matchpay.py generate --seed N
+scenarios_synth/
+
+# Cached local-model answers
+algorithms/.cache/
+
+# Secrets, just in case (nothing in this project uses any)
+.env
+.env.*
+*.key
+*.pem

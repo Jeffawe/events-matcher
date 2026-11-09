@@ -1,0 +1,106 @@
+{
+  "id": "wedding",
+  "name": "Wedding week",
+  "start_date": "2026-05-11",
+  "end_date": "2026-05-17",
+  "people": [
+    {"id": "john", "name": "John Adeyemi"},
+    {"id": "jake", "name": "Jake Morris"},
+    {"id": "priya_n", "name": "Priya Nair"},
+    {"id": "priya_s", "name": "Priya Shah"},
+    {"id": "chris", "name": "Chris Lee"},
+    {"id": "kris", "name": "Kris Tan"},
+    {"id": "amara", "name": "Amara Okoye"}
+  ],
+  "invoices": [
+    {
+      "id": "w_venue",
+      "date": "2026-05-11",
+      "vendor": "Harbour Hall",
+      "description": "Venue balance",
+      "total": "3500.00",
+      "shares": [
+        {"person": "john", "percent": "20"},
+        {"person": "jake", "percent": "20"},
+        {"person": "priya_n", "percent": "15"},
+        {"person": "priya_s", "percent": "15"},
+        {"person": "chris", "percent": "10"},
+        {"person": "kris", "percent": "10"},
+        {"person": "amara", "percent": "10"}
+      ]
+    },
+    {
+      "id": "w_rehearsal",
+      "date": "2026-05-13",
+      "vendor": "Bellini's",
+      "description": "Rehearsal dinner",
+      "total": "1240.75",
+      "shares": [
+        {"person": "john", "percent": "25"},
+        {"person": "priya_n", "percent": "25"},
+        {"person": "priya_s", "percent": "25"},
+        {"person": "chris", "percent": "25"}
+      ]
+    },
+    {
+      "id": "w_flowers",
+      "date": "2026-05-13",
+      "vendor": "Bloom & Co",
+      "description": "Flowers",
+      "total": "480.00",
+      "shares": [{"person": "priya_n", "amount": "240.00"}, {"person": "priya_s", "amount": "240.00"}]
+    },
+    {
+      "id": "w_shuttle",
+      "date": "2026-05-14",
+      "vendor": "City Coach",
+      "description": "Guest shuttle",
+      "total": "330.00",
+      "shares": [
+        {"person": "chris", "percent": "33.33"},
+        {"person": "kris", "percent": "33.33"},
+        {"person": "amara", "percent": "33.34"}
+      ]
+    },
+    {
+      "id": "w_photo",
+      "date": "2026-05-15",
+      "vendor": "Lens Studio",
+      "description": "Photographer",
+      "total": "1500.00",
+      "shares": [
+        {"person": "john", "amount": "500.00"},
+        {"person": "jake", "amount": "500.00"},
+        {"person": "amara", "amount": "500.00"}
+      ]
+    },
+    {
+      "id": "w_suits",
+      "date": "2026-05-15",
+      "vendor": "Tailor Row",
+      "description": "Suit hire",
+      "total": "660.00",
+      "shares": [
+        {"person": "john", "amount": "220.00"},
+        {"person": "jake", "amount": "220.00"},
+        {"person": "chris", "amount": "220.00"}
+      ]
+    },
+    {
+      "id": "w_brunch",
+      "date": "2026-05-16",
+      "vendor": "Sunny Side",
+      "description": "Morning-after brunch",
+      "total": "275.40",
+      "shares": [{"person": "kris", "percent": "60"}, {"person": "amara", "percent": "40"}]
+    },
+    {
+      "id": "w_afterparty",
+      "date": "2026-05-16",
+      "vendor": "Club Nine",
+      "description": "Afterparty",
+      "total": "800.00",
+      "shares": [{"person": "jake", "percent": "50"}, {"person": "chris", "percent": "30"}, {"person": "kris", "percent": "20"}]
+    }
+  ]
+}

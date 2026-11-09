@@ -1,0 +1,122 @@
+{
+  "id": "austin",
+  "name": "Austin conference week",
+  "start_date": "2026-09-14",
+  "end_date": "2026-09-20",
+  "people": [
+    {"id": "john", "name": "John Adeyemi"},
+    {"id": "mei", "name": "Mei Chen"},
+    {"id": "ben", "name": "Ben Carter"},
+    {"id": "priya_n", "name": "Priya Nair"},
+    {"id": "dele", "name": "Dele Ojo"},
+    {"id": "kris", "name": "Kris Tan"},
+    {"id": "jake", "name": "Jake Morris"}
+  ],
+  "invoices": [
+    {
+      "id": "a_airbnb",
+      "date": "2026-09-14",
+      "vendor": "Airbnb",
+      "description": "East side house",
+      "total": "4200.00",
+      "shares": [
+        {"person": "john", "percent": "20"},
+        {"person": "mei", "percent": "20"},
+        {"person": "ben", "percent": "15"},
+        {"person": "priya_n", "percent": "15"},
+        {"person": "dele", "percent": "10"},
+        {"person": "kris", "percent": "10"},
+        {"person": "jake", "percent": "10"}
+      ]
+    },
+    {
+      "id": "a_passes",
+      "date": "2026-09-14",
+      "vendor": "ConfCo",
+      "description": "Conference passes",
+      "total": "3150.00",
+      "shares": [
+        {"person": "john", "amount": "450.00"},
+        {"person": "mei", "amount": "450.00"},
+        {"person": "ben", "amount": "450.00"},
+        {"person": "priya_n", "amount": "450.00"},
+        {"person": "dele", "amount": "450.00"},
+        {"person": "kris", "amount": "450.00"},
+        {"person": "jake", "amount": "450.00"}
+      ]
+    },
+    {
+      "id": "a_dinner",
+      "date": "2026-09-15",
+      "vendor": "Uchi",
+      "description": "Team dinner",
+      "total": "684.90",
+      "shares": [{"person": "john", "percent": "34"}, {"person": "mei", "percent": "33"}, {"person": "ben", "percent": "33"}]
+    },
+    {
+      "id": "a_rides",
+      "date": "2026-09-16",
+      "vendor": "Uber",
+      "description": "Rides",
+      "total": "127.33",
+      "shares": [{"person": "priya_n", "percent": "50"}, {"person": "dele", "percent": "50"}]
+    },
+    {
+      "id": "a_bbq",
+      "date": "2026-09-17",
+      "vendor": "Franklin",
+      "description": "BBQ",
+      "total": "540.00",
+      "shares": [
+        {"person": "jake", "percent": "25"},
+        {"person": "kris", "percent": "25"},
+        {"person": "dele", "percent": "25"},
+        {"person": "priya_n", "percent": "25"}
+      ]
+    },
+    {
+      "id": "a_wifi",
+      "date": "2026-09-18",
+      "vendor": "Airbnb",
+      "description": "Extra wifi",
+      "total": "45.00",
+      "shares": [
+        {"person": "john", "amount": "15.00"},
+        {"person": "mei", "amount": "15.00"},
+        {"person": "ben", "amount": "15.00"}
+      ]
+    },
+    {
+      "id": "a_karaoke",
+      "date": "2026-09-18",
+      "vendor": "Ego's",
+      "description": "Karaoke room",
+      "total": "390.00",
+      "shares": [{"person": "mei", "percent": "40"}, {"person": "ben", "percent": "30"}, {"person": "jake", "percent": "30"}]
+    },
+    {
+      "id": "a_tab",
+      "date": "2026-09-19",
+      "vendor": "Rainey St",
+      "description": "Bar tab",
+      "total": "1022.50",
+      "shares": [{"person": "john", "percent": "70"}, {"person": "jake", "percent": "30"}]
+    },
+    {
+      "id": "a_cleaning",
+      "date": "2026-09-20",
+      "vendor": "Airbnb",
+      "description": "Cleaning fee",
+      "total": "200.00",
+      "shares": [{"person": "john", "percent": "50"}, {"person": "mei", "percent": "50"}]
+    },
+    {
+      "id": "a_parking",
+      "date": "2026-09-20",
+      "vendor": "ParkATX",
+      "description": "Parking",
+      "total": "96.50",
+      "shares": [{"person": "kris", "amount": "96.50"}]
+    }
+  ]
+}

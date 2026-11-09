@@ -1,0 +1,78 @@
+{
+  "id": "film_festival",
+  "name": "Brooklyn film festival",
+  "start_date": "2026-10-04",
+  "end_date": "2026-10-07",
+  "people": [
+    {"id": "alex_k", "name": "Alex Kim"},
+    {"id": "alexa_k", "name": "Alexandra Kim"},
+    {"id": "sam_l", "name": "Sam Lee"},
+    {"id": "jose_r", "name": "José Rivera"},
+    {"id": "zoe_m", "name": "Zoë Martin"},
+    {"id": "mina_k", "name": "Mina Kim"}
+  ],
+  "invoices": [
+    {
+      "id": "f_airbnb",
+      "date": "2026-10-04",
+      "vendor": "Airbnb",
+      "description": "Festival apartment",
+      "total": "1800.00",
+      "shares": [
+        {"person": "alex_k", "amount": "360.00"},
+        {"person": "alexa_k", "amount": "360.00"},
+        {"person": "sam_l", "amount": "360.00"},
+        {"person": "jose_r", "amount": "360.00"},
+        {"person": "mina_k", "amount": "360.00"}
+      ]
+    },
+    {
+      "id": "f_badges",
+      "date": "2026-10-04",
+      "vendor": "BKFF",
+      "description": "All-access badges",
+      "total": "625.00",
+      "shares": [
+        {"person": "alex_k", "amount": "125.00"},
+        {"person": "sam_l", "amount": "125.00"},
+        {"person": "jose_r", "amount": "125.00"},
+        {"person": "zoe_m", "amount": "125.00"},
+        {"person": "mina_k", "amount": "125.00"}
+      ]
+    },
+    {
+      "id": "f_screening",
+      "date": "2026-10-05",
+      "vendor": "Nitehawk",
+      "description": "Private screening room",
+      "total": "540.00",
+      "shares": [
+        {"person": "alex_k", "percent": "33.33"},
+        {"person": "alexa_k", "percent": "33.33"},
+        {"person": "mina_k", "percent": "33.34"}
+      ]
+    },
+    {
+      "id": "f_dinner",
+      "date": "2026-10-06",
+      "vendor": "Diner",
+      "description": "Filmmaker dinner",
+      "total": "428.17",
+      "shares": [
+        {"person": "alex_k", "percent": "25"},
+        {"person": "sam_l", "percent": "25"},
+        {"person": "jose_r", "percent": "25"},
+        {"person": "zoe_m", "percent": "25"}
+      ]
+    },
+    {
+      "id": "f_equipment",
+      "date": "2026-10-07",
+      "vendor": "CSI Rentals",
+      "description": "Projector adapter replacement",
+      "total": "86.70",
+      "shares": [{"person": "zoe_m", "percent": "100"}],
+      "note": "Zoë lost the original adapter."
+    }
+  ]
+}

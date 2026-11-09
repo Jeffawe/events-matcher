@@ -1,0 +1,82 @@
+{
+  "id": "nyc_reunion",
+  "name": "NYC college reunion",
+  "start_date": "2026-10-02",
+  "end_date": "2026-10-05",
+  "people": [
+    {"id": "alex_k", "name": "Alex Kim"},
+    {"id": "alexa_k", "name": "Alexandra Kim"},
+    {"id": "sam_l", "name": "Sam Lee"},
+    {"id": "samuel_l", "name": "Samuel Lee"},
+    {"id": "jose_r", "name": "José Rivera"},
+    {"id": "zoe_m", "name": "Zoë Martin"}
+  ],
+  "invoices": [
+    {
+      "id": "n_hotel",
+      "date": "2026-10-02",
+      "vendor": "The Bowery House",
+      "description": "Three rooms, three nights",
+      "total": "2160.00",
+      "shares": [
+        {"person": "alex_k", "percent": "16.67"},
+        {"person": "alexa_k", "percent": "16.67"},
+        {"person": "sam_l", "percent": "16.67"},
+        {"person": "samuel_l", "percent": "16.67"},
+        {"person": "jose_r", "percent": "16.66"},
+        {"person": "zoe_m", "percent": "16.66"}
+      ]
+    },
+    {
+      "id": "n_show",
+      "date": "2026-10-03",
+      "vendor": "Telecharge",
+      "description": "Broadway tickets",
+      "total": "750.00",
+      "shares": [
+        {"person": "alex_k", "amount": "125.00"},
+        {"person": "alexa_k", "amount": "125.00"},
+        {"person": "sam_l", "amount": "125.00"},
+        {"person": "samuel_l", "amount": "125.00"},
+        {"person": "jose_r", "amount": "125.00"},
+        {"person": "zoe_m", "amount": "125.00"}
+      ]
+    },
+    {
+      "id": "n_dinner",
+      "date": "2026-10-03",
+      "vendor": "Nom Wah Tea Parlor",
+      "description": "Reunion dinner",
+      "total": "428.17",
+      "shares": [
+        {"person": "alex_k", "percent": "25"},
+        {"person": "sam_l", "percent": "25"},
+        {"person": "jose_r", "percent": "25"},
+        {"person": "zoe_m", "percent": "25"}
+      ]
+    },
+    {
+      "id": "n_cabs",
+      "date": "2026-10-04",
+      "vendor": "Curb",
+      "description": "Airport and late-night cabs",
+      "total": "184.00",
+      "shares": [
+        {"person": "alexa_k", "amount": "92.00"},
+        {"person": "samuel_l", "amount": "92.00"}
+      ]
+    },
+    {
+      "id": "n_damage",
+      "date": "2026-10-05",
+      "vendor": "The Bowery House",
+      "description": "Broken lamp and minibar",
+      "total": "173.40",
+      "shares": [
+        {"person": "sam_l", "percent": "60"},
+        {"person": "samuel_l", "percent": "30"}
+      ],
+      "note": "Only 90% was assigned; the group is still disputing the rest."
+    }
+  ]
+}
