@@ -6,7 +6,7 @@ answer key and is never read here.
 
 import json
 from datetime import date, datetime
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
 from matcher import match_payments
@@ -16,8 +16,10 @@ from obligations import compute_obligations
 DATA = Path(__file__).parent / "scenarios"
 
 
-def to_cents(dollars: str) -> int:
-    return int(Decimal(dollars) * 100)
+def to_cents(dollars) -> int:
+    """Dollars to integer cents, rounding half up. Takes "19.99" or a JSON number (19.99).
+    Going through str() matters: Decimal(19.99) is 19.989999..., which truncates to 1998."""
+    return int((Decimal(str(dollars).strip()) * 100).quantize(Decimal(1), rounding=ROUND_HALF_UP))
 
 
 def read(path: Path):
@@ -26,7 +28,7 @@ def read(path: Path):
 
 def load_share(raw: dict) -> Share:
     if "percent" in raw:
-        return Share(raw["person"], percent=Decimal(raw["percent"]))
+        return Share(raw["person"], percent=Decimal(str(raw["percent"]).strip()))
     return Share(raw["person"], amount_cents=to_cents(raw["amount"]))
 
 

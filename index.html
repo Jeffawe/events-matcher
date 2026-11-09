@@ -34,6 +34,8 @@ button.ghost{background:transparent;color:var(--accent);border:1px solid var(--l
 table.score{border-collapse:collapse;width:100%}table.score td{padding:6px 10px;border-bottom:1px solid var(--line)}
 table.score td:last-child{text-align:right;font-variant-numeric:tabular-nums}
 .good{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}
+#problems{margin-top:12px;border-color:var(--bad)}#problems h3{margin:0 0 6px;font-size:16px;color:var(--bad)}#problems ul{margin:0;padding-left:20px}
+#notes ul{color:var(--mute);font-size:14px;padding-left:20px}
 .dl{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 iframe{width:100%;height:760px;border:1px solid var(--line);border-radius:12px;background:#fff}
 ol{padding-left:20px}li{margin:4px 0}
@@ -44,14 +46,15 @@ footer{margin-top:40px;color:var(--mute);font-size:14px}
 <main>
 <h1>Events matcher</h1>
 <p class="lead">Match messy bank payments to the shared-expense invoices they pay. Names are abbreviated, one payment covers several people, bank alerts repeat, memos are free text. Anything the matcher can't be sure of is held for a person instead of guessed.</p>
-<p>This page runs the project's real Python code <b>in your browser</b> (via <a href="https://pyodide.org">Pyodide</a>). Nothing you load is uploaded. It uses the rule-based matcher; the optional local language model needs the command-line version. <a href="https://github.com/Jeffawe/events-matcher">Source and docs on GitHub</a>.</p>
+<p>This page runs the project's real Python code <b>in your browser</b> (via <a href="https://pyodide.org">Pyodide</a>). Nothing you load is uploaded. It uses the rule-based matcher; the optional local language model needs the command-line version.</p>
+<p><a href="data-format.html"><b>Data format guide</b></a> · <a href="https://github.com/Jeffawe/events-matcher">Source on GitHub</a></p>
 
 <h2>Try it</h2>
 <div class="card">
   <div class="modes" role="radiogroup" aria-label="Where the data comes from">
     <label class="mode"><input type="radio" name="mode" value="sample" checked><b>Sample data</b><span>7 events, 51 invoices, 100 messy payments, with an answer key.</span></label>
     <label class="mode"><input type="radio" name="mode" value="generate"><b>Generate a new world</b><span>A brand-new messy scenario with known answers, from a seed.</span></label>
-    <label class="mode"><input type="radio" name="mode" value="custom"><b>Your own files</b><span>Event JSON files plus a payments.json. See the README for the format.</span></label>
+    <label class="mode"><input type="radio" name="mode" value="custom"><b>Your own files</b><span>Event JSON files plus a payments list. <a href="data-format.html">See the format</a>.</span></label>
   </div>
   <div class="opts" id="opts-generate" hidden>
     <label class="f">Seed <input type="number" id="seed" value="7" min="1" max="99999"></label>
@@ -60,15 +63,17 @@ footer{margin-top:40px;color:var(--mute);font-size:14px}
   </div>
   <div class="opts" id="opts-custom" hidden>
     <input type="file" id="files" accept=".json,application/json" multiple>
-    <p class="mute" style="margin-top:8px">Select all your event files and <code>payments.json</code> together (optionally <code>expected.json</code> to see a score).</p>
+    <p class="mute" style="margin-top:8px">Select all your event files and your payments file together (optionally an answer key to see a score). File names don't matter. <a href="data-format.html">What format do they need?</a> · <a href="data-format.html#example">Download a tiny example</a></p>
   </div>
   <button id="run" disabled>Loading Python…</button>
   <p id="status" role="status" aria-live="polite"></p>
+  <div id="problems" class="card" hidden></div>
 </div>
 
 <section id="results" hidden>
   <h2>Result</h2>
   <div class="cards" id="cards"></div>
+  <div id="notes"></div>
   <div id="score"></div>
   <div class="dl" id="downloads"></div>
   <iframe id="report" sandbox="" title="Matching report"></iframe>
@@ -94,7 +99,7 @@ const PY_FILES = [
   "algorithms/identity.py","algorithms/level1_direct.py","algorithms/level2_variants.py",
   "algorithms/level3_memo.py","algorithms/level4_items.py","algorithms/lexicon.py","algorithms/normalize.py",
   "algorithms/params.py","algorithms/pipeline.py","algorithms/reconcile.py","algorithms/report.py",
-  "algorithms/review.py","algorithms/reviews.py","algorithms/state.py","algorithms/synth.py"
+  "algorithms/review.py","algorithms/reviews.py","algorithms/state.py","algorithms/synth.py","algorithms/validate.py"
 ];
 const SAMPLE_FILES = [
   "events/austin.json","events/cabin_retreat.json","events/film_festival.json","events/lake.json",
@@ -171,14 +176,34 @@ async function run() {
     if (mode() === "sample") raw = g.run_folder("/app/scenarios", "Sample data");
     else if (mode() === "generate") raw = g.generate_and_run(+$("seed").value || 1, +$("events").value || 4, +$("people").value || 11);
     else raw = g.run_custom(JSON.stringify(await readCustomFiles()));
-    show(JSON.parse(raw));
+    const res = JSON.parse(raw);
+    if (res.errors) { showProblems(res.errors); say("Your files need a few fixes before they can be matched.", true); return; }
+    $("problems").hidden = true;
+    show(res);
     say("");
   } catch (e) {
     say("Something went wrong: " + String(e.message || e).split("\n").filter(Boolean).slice(-1)[0], true);
   } finally { runBtn.disabled = false; }
 }
 
+function showProblems(list) {
+  const box = $("problems"), h = document.createElement("h3"), ul = document.createElement("ul");
+  h.textContent = `${list.length} problem${list.length === 1 ? "" : "s"} to fix`;
+  for (const m of list) { const li = document.createElement("li"); li.textContent = m; ul.append(li); }
+  const more = document.createElement("p"); more.className = "mute"; more.style.margin = "8px 0 0";
+  const a = document.createElement("a"); a.href = "data-format.html"; a.textContent = "Data format guide";
+  more.append("Not sure what's expected? See the ", a, ".");
+  box.replaceChildren(h, ul, more); box.hidden = false;
+}
+
 function show(res) {
+  const notes = $("notes");
+  if (res.warnings && res.warnings.length) {
+    const ul = document.createElement("ul");
+    for (const m of res.warnings) { const li = document.createElement("li"); li.textContent = m; ul.append(li); }
+    const h = document.createElement("h2"); h.textContent = "Notes about your data";
+    notes.replaceChildren(h, ul);
+  } else notes.replaceChildren();
   const s = res.summary;
   const cards = [
     [money(s.placed_cents), "matched to invoices"], [money(s.held_cents), "waiting for a person"],

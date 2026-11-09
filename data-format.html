@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Events matcher: data format</title>
+<meta name="description" content="What files the events matcher expects, field by field, with a complete example.">
+<style>
+:root{--bg:#fafaf8;--fg:#1f2328;--mute:#656d76;--card:#fff;--line:#e3e1db;--accent:#2457c5;--code:#f1efe9;--bad:#c4321f}
+@media (prefers-color-scheme:dark){:root{--bg:#16181c;--fg:#e6e6e3;--mute:#9aa1a9;--card:#1f2227;--line:#32363d;--accent:#7aa2f7;--code:#101216;--bad:#f07a68}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 16px 80px}
+h1{font-size:28px;margin:8px 0 6px}h2{font-size:21px;margin:42px 0 10px;padding-top:6px;border-top:1px solid var(--line)}h3{font-size:16px;margin:22px 0 6px}
+p{margin:0 0 12px}.lead{color:var(--mute);font-size:17px}.mute{color:var(--mute)}
+a{color:var(--accent)}code{background:var(--code);padding:1px 5px;border-radius:5px;font-size:.92em}
+pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;font-size:13.5px;line-height:1.5;margin:8px 0 14px}
+pre code{background:none;padding:0}
+.top{display:flex;gap:14px;flex-wrap:wrap;font-size:15px}
+nav.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:18px 0}
+nav.toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}nav.toc li{margin:2px 0}
+.wrap{overflow-x:auto;margin:8px 0 14px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mute);font-size:12px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+td:first-child{white-space:nowrap}
+.req{font-size:12px;color:var(--bad);font-weight:600}.opt{font-size:12px;color:var(--mute)}
+.callout{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;margin:12px 0}
+.tree{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;line-height:1.5}
+ul,ol{padding-left:22px}li{margin:4px 0}
+@media (max-width:560px){nav.toc ol{columns:1}}
+footer{margin-top:48px;color:var(--mute);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="./">&larr; Back to the matcher</a><a href="https://github.com/Jeffawe/events-matcher">GitHub</a></div>
+<h1>Data format</h1>
+<p class="lead">The matcher needs three things: who was in each event and what was owed, what was paid, and (optionally) the right answers so it can score itself. All of it is plain JSON.</p>
+
+<nav class="toc" aria-label="On this page"><ol>
+  <li><a href="#overview">The big picture</a></li>
+  <li><a href="#event">Event files</a></li>
+  <li><a href="#payments">The payments file</a></li>
+  <li><a href="#key">Answer key (optional)</a></li>
+  <li><a href="#rules">Conventions and rules</a></li>
+  <li><a href="#example">A complete example</a></li>
+  <li><a href="#page">Using your files on the test page</a></li>
+  <li><a href="#cli">Using a folder on the command line</a></li>
+  <li><a href="#problems">Common problems</a></li>
+</ol></nav>
+
+<h2 id="overview">The big picture</h2>
+<p>Think of a group trip. Several people shared costs: a hotel, a dinner, a taxi. Each cost is an <b>invoice</b> split between some of the people. Later, money arrives in a bank account, labelled only with whatever the sender's bank printed. The matcher works out who each payment came from and which invoices it paid.</p>
+<div class="wrap"><table>
+<tr><th>You provide</th><th>What it is</th><th>Needed?</th></tr>
+<tr><td>Event files</td><td>One JSON file per event: the people involved and the invoices, with how each invoice is split.</td><td><span class="req">required</span> (at least one)</td></tr>
+<tr><td>Payments</td><td>One JSON list of money received: sender name as the bank shows it, amount, time, and any memo.</td><td><span class="req">required</span></td></tr>
+<tr><td>Answer key</td><td>The true sender and links for each payment. Only used to score the matcher; never used to match.</td><td><span class="opt">optional</span></td></tr>
+</table></div>
+<p>Payments never name an invoice. That is the whole point: the matcher infers it from the sender, the amount, the timing and the memo.</p>
+
+<h2 id="event">Event files</h2>
+<p>One file per event, for example <code>events/lisbon.json</code>. The file's name doesn't matter.</p>
+<div class="wrap"><table>
+<tr><th>Field</th><th>Type</th><th></th><th>Meaning</th></tr>
+<tr><td><code>id</code></td><td>text</td><td><span class="req">required</span></td><td>A short unique id for the event, like <code>"trip"</code>.</td></tr>
+<tr><td><code>name</code></td><td>text</td><td><span class="req">required</span></td><td>What people call it, like <code>"Lisbon weekend"</code>. Words in it help: a memo saying "deposit for lisbon" points at this event's invoices.</td></tr>
+<tr><td><code>start_date</code>, <code>end_date</code></td><td>date</td><td><span class="req">required</span></td><td>Format <code>YYYY-MM-DD</code>.</td></tr>
+<tr><td><code>people</code></td><td>list</td><td><span class="req">required</span></td><td>Everyone in this event. Each is <code>{"id": "ana", "name": "Ana Silva"}</code>.</td></tr>
+<tr><td><code>invoices</code></td><td>list</td><td><span class="req">required</span></td><td>What was spent. See below.</td></tr>
+</table></div>
+
+<h3>People</h3>
+<ul>
+<li><code>id</code> is any short unique text. <b>The same id must mean the same person in every event</b>, so someone who goes on two trips keeps one id.</li>
+<li><code>name</code> is the full name the way people would normally write it. Accents are fine (<code>Chloé</code>). The matcher compares names loosely, so it finds "Chloe M", "D. Patel" or "BEN CARTER".</li>
+</ul>
+
+<h3>Invoices</h3>
+<div class="wrap"><table>
+<tr><th>Field</th><th>Type</th><th></th><th>Meaning</th></tr>
+<tr><td><code>id</code></td><td>text</td><td><span class="req">required</span></td><td>Unique across <b>all</b> events, like <code>"t_hotel"</code>.</td></tr>
+<tr><td><code>date</code></td><td>date</td><td><span class="req">required</span></td><td><code>YYYY-MM-DD</code>. Payments are normally matched to invoices dated on or before them.</td></tr>
+<tr><td><code>vendor</code></td><td>text</td><td><span class="req">required</span></td><td>Who was paid, like <code>"Hotel Alfama"</code>.</td></tr>
+<tr><td><code>description</code></td><td>text</td><td><span class="req">required</span></td><td>What it was for, like <code>"Group dinner"</code>. Memo words are matched against the vendor, description and event name ("dinner", "taxi").</td></tr>
+<tr><td><code>total</code></td><td>amount</td><td><span class="req">required</span></td><td>Dollars, like <code>"800.00"</code>. Must be more than zero.</td></tr>
+<tr><td><code>shares</code></td><td>list</td><td><span class="req">required</span></td><td>Who owes what. See below.</td></tr>
+<tr><td><code>note</code></td><td>text</td><td><span class="opt">optional</span></td><td>Anything you want to remember. Not used in matching.</td></tr>
+</table></div>
+
+<h3>Shares: how an invoice is split</h3>
+<p>Each share names a <code>person</code> (an id from this event's <code>people</code>) and <b>exactly one</b> of:</p>
+<ul>
+<li><code>"percent": "25"</code>, a percentage of the total, or</li>
+<li><code>"amount": "100.00"</code>, a fixed number of dollars.</li>
+</ul>
+<p>You can mix the two on one invoice. People left out of the shares owe nothing on that invoice (the taxi in the example involves only two of the four).</p>
+<div class="callout">Percent shares are worked out in whole cents. Each is rounded down, and any leftover cents go to the shares one at a time <b>in the order you list them</b>, so the shares always add up exactly. If the shares add up to less than the total (say 90%), the rest is reported as "unassigned"; if they add up to more, it is reported as over-assigned. Neither stops the run.</div>
+
+<h2 id="payments">The payments file</h2>
+<p>One JSON <b>list</b>, usually <code>payments.json</code>, of money that arrived. Each entry:</p>
+<div class="wrap"><table>
+<tr><th>Field</th><th>Type</th><th></th><th>Meaning</th></tr>
+<tr><td><code>id</code></td><td>text</td><td><span class="req">required</span></td><td>Unique per payment, like <code>"p1"</code>.</td></tr>
+<tr><td><code>sender_name</code></td><td>text</td><td><span class="req">required</span></td><td>Exactly what the bank shows, however messy: <code>"BEN CARTER"</code>, <code>"D. Patel"</code>, <code>"MOBILE DEPOSIT"</code>, even other scripts.</td></tr>
+<tr><td><code>amount</code></td><td>amount</td><td><span class="req">required</span></td><td>Dollars received, like <code>"200.00"</code>. Zero or negative amounts are held for review, not matched.</td></tr>
+<tr><td><code>timestamp</code></td><td>date-time</td><td><span class="req">required</span></td><td>When it arrived, like <code>"2027-05-10T09:12:00"</code>. Seconds are optional, and a bare date works. Payments are processed in time order.</td></tr>
+<tr><td><code>memo</code></td><td>text</td><td><span class="opt">optional</span></td><td>Whatever the sender typed. Often empty. Useful ones: <code>"hotel"</code>, <code>"cab 92 + cabin 360"</code>, <code>"covering Chloé's share"</code>.</td></tr>
+</table></div>
+<p>Include only money <i>received</i>. Lines that look like outgoing payments or requests (a memo starting "You paid…" or "requests…") and bank-alert duplicates ("Chase alert") are detected and held rather than counted.</p>
+
+<h2 id="key">Answer key (optional)</h2>
+<p>If you know the right answers, add a key and the page (or <code>matchpay score</code>) will grade the matcher against it. It is never used for matching.</p>
+<pre><code>{
+  "payments": [
+    {"payment_id": "p1", "payer": "ana",
+     "links": [{"invoice": "t_hotel", "owed_by": "ana", "amount": "200.00"},
+               {"invoice": "t_dinner", "owed_by": "ana", "amount": "100.00"}]},
+    {"payment_id": "p7", "payer": null, "links": []}
+  ]
+}</code></pre>
+<ul>
+<li><code>payer</code> is the person id who really sent it, or <code>null</code> if it can't be known (the right answer for a payment the matcher should hold).</li>
+<li><code>links</code> lists which invoice shares it should pay. <code>owed_by</code> can differ from <code>payer</code> when someone covers another person.</li>
+</ul>
+
+<h2 id="rules">Conventions and rules</h2>
+<ul>
+<li><b>Money</b> is dollars, written as text (<code>"19.99"</code>) or a plain JSON number (<code>19.99</code>). Both give the same result. Amounts are rounded to whole cents. One currency per dataset; there is no currency conversion. No thousands separators (<code>"1000.00"</code>, not <code>"1,000.00"</code>).</li>
+<li><b>Dates</b> are <code>YYYY-MM-DD</code>; <b>times</b> are ISO 8601 like <code>2027-05-10T09:12:00</code>.</li>
+<li><b>Ids</b> can be any non-empty text. Person ids are shared across events; invoice ids and payment ids must be unique.</li>
+<li><b>Names are free text.</b> Nothing about a sender needs to be clean. The matcher handles case, accents, initials, typos, swapped order, nicknames and extra words, and holds anything it can't be sure of.</li>
+<li><b>Timing matters a little.</b> A payment normally pays invoices dated on or before it. A memo that clearly names a later invoice or event (a deposit) can reach forward.</li>
+<li><b>Nothing is guessed silently.</b> Anything uncertain shows up under "Needs a person" in the report.</li>
+</ul>
+
+<h2 id="example">A complete example</h2>
+<p>A four-person trip with three invoices and seven messy payments. Download the files from the repo and load them on <a href="./">the test page</a> (choose "Your own files", then select <b>both</b> files together):</p>
+<ul>
+<li><a href="examples/minimal/events/trip.json" download>trip.json</a> (the event)</li>
+<li><a href="examples/minimal/payments.json" download>payments.json</a> (the payments)</li>
+</ul>
+<h3>events/trip.json</h3>
+<pre data-file="examples/minimal/events/trip.json"><code>{
+  &quot;id&quot;: &quot;trip&quot;,
+  &quot;name&quot;: &quot;Lisbon weekend&quot;,
+  &quot;start_date&quot;: &quot;2027-05-07&quot;,
+  &quot;end_date&quot;: &quot;2027-05-09&quot;,
+  &quot;people&quot;: [
+    {&quot;id&quot;: &quot;ana&quot;, &quot;name&quot;: &quot;Ana Silva&quot;},
+    {&quot;id&quot;: &quot;ben&quot;, &quot;name&quot;: &quot;Ben Carter&quot;},
+    {&quot;id&quot;: &quot;chloe&quot;, &quot;name&quot;: &quot;Chloé Martin&quot;},
+    {&quot;id&quot;: &quot;dev&quot;, &quot;name&quot;: &quot;Dev Patel&quot;}
+  ],
+  &quot;invoices&quot;: [
+    {
+      &quot;id&quot;: &quot;t_hotel&quot;, &quot;date&quot;: &quot;2027-05-07&quot;, &quot;vendor&quot;: &quot;Hotel Alfama&quot;, &quot;description&quot;: &quot;2 nights, 2 rooms&quot;,
+      &quot;total&quot;: &quot;800.00&quot;,
+      &quot;shares&quot;: [
+        {&quot;person&quot;: &quot;ana&quot;, &quot;percent&quot;: &quot;25&quot;}, {&quot;person&quot;: &quot;ben&quot;, &quot;percent&quot;: &quot;25&quot;},
+        {&quot;person&quot;: &quot;chloe&quot;, &quot;percent&quot;: &quot;25&quot;}, {&quot;person&quot;: &quot;dev&quot;, &quot;percent&quot;: &quot;25&quot;}
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;t_dinner&quot;, &quot;date&quot;: &quot;2027-05-08&quot;, &quot;vendor&quot;: &quot;Casa do Peixe&quot;, &quot;description&quot;: &quot;Group dinner&quot;,
+      &quot;total&quot;: &quot;240.00&quot;,
+      &quot;shares&quot;: [
+        {&quot;person&quot;: &quot;ana&quot;, &quot;amount&quot;: &quot;100.00&quot;}, {&quot;person&quot;: &quot;ben&quot;, &quot;amount&quot;: &quot;60.00&quot;},
+        {&quot;person&quot;: &quot;chloe&quot;, &quot;amount&quot;: &quot;40.00&quot;}, {&quot;person&quot;: &quot;dev&quot;, &quot;amount&quot;: &quot;40.00&quot;}
+      ]
+    },
+    {
+      &quot;id&quot;: &quot;t_taxi&quot;, &quot;date&quot;: &quot;2027-05-09&quot;, &quot;vendor&quot;: &quot;City Cabs&quot;, &quot;description&quot;: &quot;Airport taxi&quot;,
+      &quot;total&quot;: &quot;60.00&quot;,
+      &quot;shares&quot;: [{&quot;person&quot;: &quot;ana&quot;, &quot;percent&quot;: &quot;50&quot;}, {&quot;person&quot;: &quot;ben&quot;, &quot;percent&quot;: &quot;50&quot;}],
+      &quot;note&quot;: &quot;Only Ana and Ben took the taxi&quot;
+    }
+  ]
+}</code></pre>
+<h3>payments.json</h3>
+<pre data-file="examples/minimal/payments.json"><code>[
+  {&quot;id&quot;: &quot;p1&quot;, &quot;sender_name&quot;: &quot;Ana Silva&quot;,      &quot;amount&quot;: &quot;300.00&quot;, &quot;timestamp&quot;: &quot;2027-05-10T09:12:00&quot;},
+  {&quot;id&quot;: &quot;p2&quot;, &quot;sender_name&quot;: &quot;BEN CARTER&quot;,     &quot;amount&quot;: &quot;200.00&quot;, &quot;timestamp&quot;: &quot;2027-05-10T10:40:00&quot;, &quot;memo&quot;: &quot;hotel&quot;},
+  {&quot;id&quot;: &quot;p3&quot;, &quot;sender_name&quot;: &quot;Chloe M&quot;,        &quot;amount&quot;: &quot;200.00&quot;, &quot;timestamp&quot;: &quot;2027-05-11T08:05:00&quot;, &quot;memo&quot;: &quot;hotel&quot;},
+  {&quot;id&quot;: &quot;p4&quot;, &quot;sender_name&quot;: &quot;D. Patel&quot;,       &quot;amount&quot;: &quot;240.00&quot;, &quot;timestamp&quot;: &quot;2027-05-11T18:30:00&quot;},
+  {&quot;id&quot;: &quot;p5&quot;, &quot;sender_name&quot;: &quot;Ana S.&quot;,         &quot;amount&quot;: &quot;30.00&quot;,  &quot;timestamp&quot;: &quot;2027-05-12T12:00:00&quot;, &quot;memo&quot;: &quot;taxi&quot;},
+  {&quot;id&quot;: &quot;p6&quot;, &quot;sender_name&quot;: &quot;Ben Carter&quot;,     &quot;amount&quot;: &quot;100.00&quot;, &quot;timestamp&quot;: &quot;2027-05-12T20:15:00&quot;, &quot;memo&quot;: &quot;covering Chloé&#x27;s share of the dinner&quot;},
+  {&quot;id&quot;: &quot;p7&quot;, &quot;sender_name&quot;: &quot;MOBILE DEPOSIT&quot;, &quot;amount&quot;: &quot;30.00&quot;,  &quot;timestamp&quot;: &quot;2027-05-13T07:50:00&quot;}
+]</code></pre>
+<p>What the matcher does with it: "BEN CARTER", "Chloe M", "D. Patel" and "Ana S." are matched to the right people; Ana's lump $300 pays her hotel and dinner shares; Ben's memo "covering Chloé's share of the dinner" is checked by arithmetic (Ben's $60 plus Chloé's $40 is exactly $100) and split between them; and "MOBILE DEPOSIT" names nobody, so it is held for a person. Ben's taxi share is genuinely unpaid, so that invoice shows as partly paid.</p>
+
+<h2 id="page">Using your files on the test page</h2>
+<ol>
+<li>On the <a href="./">test page</a>, pick <b>Your own files</b>.</li>
+<li>Select all your files at once: every event file, the payments file, and optionally an answer key.</li>
+<li>File names don't matter. The page works out what each file is from what is inside it: a list of objects with <code>sender_name</code> is the payments, an object with <code>people</code> and <code>invoices</code> is an event, and an object with a <code>payments</code> list of <code>payment_id</code> entries is an answer key.</li>
+<li>Press <b>Run the matcher</b>. Nothing is uploaded; it all runs in your browser.</li>
+</ol>
+<p>If something is wrong with your files, the page lists each problem in plain words, with the file and the item, instead of running.</p>
+
+<h2 id="cli">Using a folder on the command line</h2>
+<p>The command-line tool reads a folder laid out like this:</p>
+<pre class="tree"><code>my_data/
+  events/
+    trip.json        one file per event
+    wedding.json
+  payments.json
+  expected.json      optional answer key</code></pre>
+<pre><code>python3 matchpay.py run --data my_data --open</code></pre>
+<p>The same checks run first, so you get the same plain-language problems. The command-line version can also use an optional local language model for the hardest names, and has a review loop that remembers your decisions. See the <a href="https://github.com/Jeffawe/events-matcher#readme">README</a>.</p>
+
+<h2 id="problems">Common problems</h2>
+<div class="wrap"><table>
+<tr><th>The page says…</th><th>What to do</th></tr>
+<tr><td><code>not valid JSON (…, line 12)</code></td><td>A missing comma, extra comma or unmatched bracket near that line. A JSON validator will point at it.</td></tr>
+<tr><td><code>missing "vendor"</code> (or <code>description</code>, <code>id</code>…)</td><td>Add the field to that invoice. Every invoice needs an id, date, vendor, description, total and shares.</td></tr>
+<tr><td><code>a share names person "x", who is not in this event's people</code></td><td>Add that person to the event's <code>people</code>, or fix the id's spelling.</td></tr>
+<tr><td><code>needs exactly one of "percent" or "amount"</code></td><td>A share has both or neither. Keep one.</td></tr>
+<tr><td><code>invoice id "…" is also used in …</code></td><td>Invoice ids must be unique across every event file. Rename one.</td></tr>
+<tr><td><code>"timestamp" must look like 2027-05-10T09:12:00</code></td><td>Use ISO format. A bare date like <code>2027-05-10</code> is accepted too.</td></tr>
+<tr><td><code>"amount" must be a number of dollars</code></td><td>Remove symbols and separators: <code>"200.00"</code>, not <code>"$200"</code> or <code>"1,000.00"</code>.</td></tr>
+<tr><td><code>No payments file found</code></td><td>Select the payments list too. It must be a JSON list whose entries have <code>sender_name</code>.</td></tr>
+<tr><td><i>Notes:</i> "shares cover $108.00 of $120.00"</td><td>Not an error. The invoice's split adds to less (or more) than its total. The report flags it.</td></tr>
+<tr><td><i>Notes:</i> "Person id … is … in one file but … in another"</td><td>Not an error, but check it: one id should mean one person across events.</td></tr>
+</table></div>
+
+<footer>MIT licensed · <a href="./">Test page</a> · <a href="https://github.com/Jeffawe/events-matcher">GitHub</a></footer>
+</main>
+</body>
+</html>

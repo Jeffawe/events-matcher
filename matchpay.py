@@ -45,6 +45,14 @@ def _setup(args):
     data = Path(args.data)
     if not (data / "events").is_dir():
         sys.exit(f"No scenario data in {data} (expected {data}/events/*.json and {data}/payments.json).")
+    from algorithms.validate import validate
+    errors, _ = validate(data)
+    if errors:
+        print(f"There are problems with the data in {data}:", file=sys.stderr)
+        for e in errors:
+            print(f"  - {e}", file=sys.stderr)
+        print("The expected format is described in data-format.html and the README.", file=sys.stderr)
+        sys.exit(1)
     events, invoices, payments = load_scenarios(data)
     return dict(
         events=events, invoices=invoices, payments=payments, data=data,
@@ -140,7 +148,10 @@ def cmd_doctor(args) -> int:
     print("Checking this machine:")
     line(sys.version_info >= (3, 11), f"Python {sys.version.split()[0]} (needs 3.11 or newer)", "install a newer Python")
     data = Path(args.data)
-    line((data / "events").is_dir() and (data / "payments.json").exists(), f"scenario data in {data}/")
+    from algorithms.validate import validate
+    errors, warnings = validate(data)
+    line(not errors, f"scenario data in {data}/ is valid" + (f" ({len(warnings)} note(s))" if warnings else ""),
+         "; ".join(errors[:3]))
     try:
         probe = ROOT / "state"
         probe.mkdir(exist_ok=True)

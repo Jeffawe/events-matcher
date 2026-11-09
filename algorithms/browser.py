@@ -74,9 +74,16 @@ def generate_and_run(seed: int, events: int = 4, people: int = 11) -> str:
 
 def run_custom(files_json: str) -> str:
     """files_json: {"events/NAME.json": text, "payments.json": text, "expected.json": text (optional)}"""
+    from algorithms.validate import validate
+
     root = Path(tempfile.mkdtemp())
     for rel, text in json.loads(files_json).items():
         target = root / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(text, encoding="utf-8")
-    return _run(root, "Your data")
+    errors, warnings = validate(root)
+    if errors:  # say what is wrong in plain words instead of crashing
+        return json.dumps({"errors": errors, "warnings": warnings})
+    out = json.loads(_run(root, "Your data"))
+    out["warnings"] = warnings
+    return json.dumps(out)

@@ -1,0 +1,36 @@
+{
+  "id": "trip",
+  "name": "Lisbon weekend",
+  "start_date": "2027-05-07",
+  "end_date": "2027-05-09",
+  "people": [
+    {"id": "ana", "name": "Ana Silva"},
+    {"id": "ben", "name": "Ben Carter"},
+    {"id": "chloe", "name": "Chloé Martin"},
+    {"id": "dev", "name": "Dev Patel"}
+  ],
+  "invoices": [
+    {
+      "id": "t_hotel", "date": "2027-05-07", "vendor": "Hotel Alfama", "description": "2 nights, 2 rooms",
+      "total": "800.00",
+      "shares": [
+        {"person": "ana", "percent": "25"}, {"person": "ben", "percent": "25"},
+        {"person": "chloe", "percent": "25"}, {"person": "dev", "percent": "25"}
+      ]
+    },
+    {
+      "id": "t_dinner", "date": "2027-05-08", "vendor": "Casa do Peixe", "description": "Group dinner",
+      "total": "240.00",
+      "shares": [
+        {"person": "ana", "amount": "100.00"}, {"person": "ben", "amount": "60.00"},
+        {"person": "chloe", "amount": "40.00"}, {"person": "dev", "amount": "40.00"}
+      ]
+    },
+    {
+      "id": "t_taxi", "date": "2027-05-09", "vendor": "City Cabs", "description": "Airport taxi",
+      "total": "60.00",
+      "shares": [{"person": "ana", "percent": "50"}, {"person": "ben", "percent": "50"}],
+      "note": "Only Ana and Ben took the taxi"
+    }
+  ]
+}

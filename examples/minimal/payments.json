@@ -1,0 +1,9 @@
+[
+  {"id": "p1", "sender_name": "Ana Silva",      "amount": "300.00", "timestamp": "2027-05-10T09:12:00"},
+  {"id": "p2", "sender_name": "BEN CARTER",     "amount": "200.00", "timestamp": "2027-05-10T10:40:00", "memo": "hotel"},
+  {"id": "p3", "sender_name": "Chloe M",        "amount": "200.00", "timestamp": "2027-05-11T08:05:00", "memo": "hotel"},
+  {"id": "p4", "sender_name": "D. Patel",       "amount": "240.00", "timestamp": "2027-05-11T18:30:00"},
+  {"id": "p5", "sender_name": "Ana S.",         "amount": "30.00",  "timestamp": "2027-05-12T12:00:00", "memo": "taxi"},
+  {"id": "p6", "sender_name": "Ben Carter",     "amount": "100.00", "timestamp": "2027-05-12T20:15:00", "memo": "covering Chloé's share of the dinner"},
+  {"id": "p7", "sender_name": "MOBILE DEPOSIT", "amount": "30.00",  "timestamp": "2027-05-13T07:50:00"}
+]

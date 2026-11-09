@@ -54,6 +54,10 @@ scenarios/expected.json        optional answer key, used only by `score` (see th
 
 Person ids are shared across events. Percent shares round down and leftover cents go to the shares in listed order.
 
+Amounts can be text (`"19.99"`) or JSON numbers; both give the same cents. The data is checked before every run and problems are reported in plain words (which file, which invoice, what's wrong).
+
+**Field-by-field guide with a complete example: https://jeffawe.github.io/events-matcher/data-format.html** (also in this repo as `data-format.html`). The same example is in `examples/minimal/`: `python3 matchpay.py run --data examples/minimal --open`.
+
 ## How it works
 
 Identity (who sent it) is decided first for every payment. Allocation (which invoice) then runs once,
